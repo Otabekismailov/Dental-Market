@@ -1,0 +1,600 @@
+{% load static %}
+{% load i18n %}
+{% load tags %}
+
+
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}">
+    <title>Dentare</title>
+    <link rel='stylesheet' href='http://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fakeLoader.css' %}">
+    <link rel="stylesheet" href="{% static 'css/line-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+</head>
+
+<body>
+
+
+<!-- preloader -->
+<div class="fakeLoader" style="background-color: rgb(255, 255, 255); display: none;">
+    <div class="fl fl-spinner spinner5">
+        <div class="cube1"></div>
+        <div class="cube2"></div>
+    </div>
+</div>
+<!-- end preloader -->
+
+
+<!-- navbar -->
+<div id="navbar" class="navbar navbar-expand-lg justify-content-center align-items-center">
+    <div class="container">
+        <a href="#" class="navbar-brand"><img src="{% static 'img/logo.png' %}" alt=""></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <i class="la la-bars"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav nav">
+                <li class="nav-item"><a class="nav-link" href="#home">{% trans 'Home' %}</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">{% trans 'About' %}</a></li>
+                <li class="nav-item"><a class="nav-link" href="#services">{% trans 'Services' %}</a></li>
+                <li class="nav-item"><a class="nav-link" href="#testimonial">{% trans 'Testimonial' %}</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">{% trans 'Contact Us' %}</a></li>
+            </ul>
+        </div>
+
+
+        <ul class="button-navbar">
+            {% for pho in contact %}
+                <li><i class="la la-phone"></i>{{ pho.phone }}</li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+    <!--  Language -->
+    <div class="col-xl-3 col-lg-4">
+        <div class="header-info header-info-right">
+
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            {% for language in languages %}
+
+                <form action="{% url 'set_language' %}" method="post" id="form_{{ language.code }}"
+                      style="display:inline!important;">
+                    {% csrf_token %}
+                    <input name="next" type="hidden" value="{{ redirect_to }}"/>
+                    <input name="language" type="hidden" value="{{ language.code }}"/>
+                </form>
+
+                <button class="buttonhover button {% if url == language.code %}active{% endif %}"
+                        type="submit"
+                        form="form_{{ language.code }}"
+                        value="Submit"
+                        style="padding: 12px 10px">
+                    {% if language.code == 'uz' %}
+                        <img src="{% static '' %}../static/img/uz.png" alt="logo" width="20px"
+                             style="width: 20px; height: 14px">
+
+                    {% elif language.code == 'ru' %}
+                        <img src="{% static '' %}../static/img/ru.png" alt="logo" width="20px"
+                             style="width: 20px; height: 14px;">
+                    {% else %}
+                        <img src="{% static '' %}../static/img/en.png" alt="logo"
+                             style="width: 20px; height: 14px;"
+                             width="20px">
+
+                    {% endif %}{{ language.code }}
+
+                </button>
+            {% endfor %}
+
+        </div>
+    </div>
+    <!-- /end Language -->
+</div>
+
+<!-- end navbar -->
+
+
+<!-- intro -->
+<div id="home" class="intro">
+    <div class="container">
+        <div class="content-box">
+            {% for item in banner %}
+                {% if LANG == 'uz' %}
+                    <span class="span-title">{{ item.title_uz }}</span>
+                    <h1>{{ item.short_description_uz }}</h1>
+                {% elif LANG == 'ru' %}
+                    <span class="span-title">{{ item.title_ru }}</span>
+                    <h1>{{ item.short_description_ru }}</h1>
+                {% elif LANG == 'en' %}
+                    <span class="span-title">{{ item.title_en }}</span>
+                    <h1>{{ item.short_description_en }}</h1>
+
+                {% endif %}
+
+                <div class="row align-items-center">
+                    <div class="col-md">
+                        <div class="content-left">
+                            <img src="{{ item.image_1.url }}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="content-right">
+                            <img src="{{ item.image_2.url }}" alt="">
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- end intro -->
+
+
+<!-- about -->
+<div id="about" class="about">
+    <div class="container">
+        <div class="row gx-5 align-items-center">
+
+
+            <div class="col-md-5">
+
+                <div class="content-left"
+                     style="background-image: url('{% for im in about_list %}{{ im.image.url }} {% endfor %}');">
+                    <div class="position-relative content-left_wrapper">
+                        {% for  ima in about_list %}
+                            <a href="{{ ima.url }}" class="video video-popup mfp-iframe"><img
+                                    src="{{ ima.video_image.url }}" alt=""></a>
+
+
+                            <span class="playIcon">
+                                    <a href="{{ ima.url }}" class="video video-popup mfp-iframe"><svg width="24"
+                                                                                                      height="24"
+                                                                                                      viewBox="0 0 24 24"
+                                                                                                      fill="#1a76d1"
+                                                                                                      xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                                d="M5 5.27392C5 3.56707 6.82609 2.48176 8.32538 3.29755L20.687 10.0237C22.2531 10.8759 22.2531 13.1243 20.687 13.9764L8.32538 20.7026C6.82609 21.5184 5 20.4331 5 18.7262V5.27392Z"></path>
+                                    </svg></a>
+                                </span>
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="open">
+                        <i class="la la-clock"></i>
+                        <h6>{% trans 'Open 8 Hours' %}</h6>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-7">
+                <div class="content">
+                    <span class="span-title-left">{% trans 'About' %}</span>
+                    {% for item in about_text %}
+                        <h2>{{ item.about_title }}</h2>
+                        <p>{{ item.about_description }}</p>
+                    {% endfor %}
+                    <div class="row">
+                        <div class="col">
+                            <div class="content-icon">
+                                <div class="icon">
+                                    <i class="la la-hand-holding-usd"></i>
+                                </div>
+                                <div class="text">
+                                    <h6>{% trans 'Affordable' %} <br>{% trans 'Prices' %}</h6>
+                                    <p>{% trans 'Lorem, ipsum dolor sit amet consectetur, adipisicing elit.' %} </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="content-icon">
+                                <div class="icon">
+                                    <i class="la la-tooth"></i>
+                                </div>
+                                <div class="text">
+                                    <h6>{% trans 'Dental' %}<br>{% trans 'Specialist' %}</h6>
+                                    <p>{% trans 'Lorem, ipsum dolor sit amet consectetur, adipisicing elit.' %} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<!-- end about -->
+
+
+<!-- products -->
+<section class="products">
+    <div class="container">
+        <span class="span-title">{% trans 'Products' %}</span>
+        <h2 class="text-center">{% trans 'Our products' %}</h2>
+        <div class="product-list owl-carousel owl-theme">
+            {% for item in products %}
+                <div class="item">
+
+                    <div class="card">
+
+                        <div class="card__image">
+                            <img alt="Allinsan LLC" loading="lazy" decoding="async" data-nimg="fill" sizes="100vw"
+                                 src="{{ item.image.url }}" style="
+                          position: absolute;
+                          height: 100%;
+                          width: 100%;
+                          inset: 0;
+                          color: transparent;
+                        "/>
+                        </div>
+                        <div class="card__body">
+                            <h4 class="mantine-focus-auto m-b6d8b162 mantine-Text-root" data-line-clamp="true"
+                                style="--text-line-clamp: 2">
+                                {% if LANG == 'uz' %}
+                                    {{ item.title_uz }}
+                                {% elif LANG == 'ru' %}
+                                    {{ item.title_ru }}
+                                {% elif LANG == 'en' %}
+                                    {{ item.title_en }}
+
+                                {% endif %}
+                            </h4>
+                            <div class="card__price">
+                                <h5>{{ item.price }}</h5>
+                                <p>{% trans "USD" %}</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            {% endfor %}
+
+
+        </div>
+    </div>
+</section>
+<!-- end products -->
+
+
+<!-- testimonial -->
+<div id="testimonial" class="testimonial">
+    <div class="container">
+        {% for it in testimonials %}
+            <div class="row gx-5 align-items-center">
+                <div class="col-md">
+                    <span class="span-title-left">{% trans 'Testimonial' %}</span>
+
+                    {% if LANG == 'uz' %}
+                        {% with it.title_uz|split as t %}
+                            <h2>{{ t.0 }}<br>{{ t.1 }}</h2>
+                        {% endwith %}
+                        <p>{{ it.description_uz }}</p>
+                    {% elif LANG == 'ru' %}
+                        {% with it.title_ru|split as t %}
+                            <h2>{{ t.0 }}<br>{{ t.1 }}</h2>
+                        {% endwith %}
+                        <p>{{ it.description_ru }}</p>
+                    {% elif LANG == 'en' %}
+                        {% with it.title_en|split as t %}
+                            <h2>{{ t.0 }}<br>{{ t.1 }}</h2>
+                        {% endwith %}
+                        <p>{{ it.description_en }}</p>
+                    {% endif %}
+                </div>
+                <div class="col-md">
+                    <div class="content">
+                        <dev class="slick-carousel">
+                            {% for ite in it.testimonialuser_set.all %}
+
+                                <div class="entry">
+                                    <div class="image">
+                                        <img src="{{ ite.image.url }}" alt="">
+                                    </div>
+                                    <div class="text">
+                                        <h6>{{ ite.full_name }}</h6>
+                                        {% if LANG == 'uz' %}
+                                            <p>{{ ite.description_uz }}</p>
+                                        {% elif LANG == 'ru' %}
+                                            <p>{{ ite.description_ru }}</p>
+                                        {% elif LANG == 'en' %}
+                                            <p>{{ ite.description_en }}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </dev>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- end testimonial -->
+<!-- Members -->
+<section id="our-team" class="block spacer p-top-xl">
+    <div class="container">
+        <div class="expert">
+            <div class="title text-max-width">
+                <h2>{% trans 'We are Dental Healthcare Professionals' %}</h2>
+            </div>
+
+            <div class="expert-list owl-carousel with-pb-md  ">
+                {% for item in members %}
+                    <div class="item">
+                        <div class="team-member ">
+                            <div class="team-member-top">
+                                <div class="img object-fit">
+                                    <div class="object-fit-cover">
+                                        <img src="{{ item.image.url }}"
+                                             alt="{{ item.first_name }}{{ ' ' }} {{ item.last_name }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="team-member-content">
+                                <h4 class="team-member-t-head">{{ item.first_name }}{{ ' ' }} {{ item.last_name }}</h4>
+
+                                <div class="team-member-description">
+                                    {% if LANG == 'uz' %}
+                                        <p>{{ item.description_uz }}</p>
+                                    {% elif LANG == 'ru' %}
+                                        <p>{{ item.description_ru }}</p>
+                                    {% elif LANG == 'en' %}
+                                        <p>{{ item.description_en }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /end Members -->
+<!-- start brands -->
+<section id="services" class="services">
+    <div class="container">
+        <span class="span-title">{% trans 'Partners' %}</span>
+        <h2 class="text-center">{% trans 'Our partners' %}</h2>
+        <div class="row g-5 justify-content-center">
+            {% for item in services %}
+                <div class="col-md-4">
+                    <div class="content">
+                        <img src="{{ item.image.url }}" alt="">
+
+                        {% if LANG == 'uz' %}
+                            <h5>{{ item.title_uz }}</h5>
+                            <p>{{ item.short_description_uz }}</p>
+                        {% elif LANG == 'ru' %}
+                            <h5>{{ item.title_ru }}</h5>
+                            <p>{{ item.short_description_ru }}</p>
+                        {% elif LANG == 'en' %}
+                            <h5>{{ item.title_en }}</h5>
+                            <p>{{ item.short_description_en }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- end brands -->
+
+<!-- contact -->
+<div id="contact" class="contact">
+    <div class="container">
+
+        <div class="content-box">
+            <div class="row g-4 align-items-center">
+                {% for item  in contact %}
+                    <div class="col-md-6">
+                        <div class="content">
+                            <div class="icon">
+                                <i class="la la-phone"></i>
+                            </div>
+                            <div class="text">
+                                <h5>{% trans 'Phone' %}</h5>
+                                <span> {{ item.phone }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="content">
+                            <div class="icon">
+                                <i class="la la-envelope"></i>
+                            </div>
+                            <div class="text">
+                                <h5>Email</h5>
+                                <span> {{ item.email }} </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="content">
+                            <div class="icon">
+                                <i class="la la-map"></i>
+                            </div>
+                            <div class="text">
+                                <h5>{% trans 'Address' %}</h5>
+                                <span>{{ item.address }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="content content-clock">
+                            <div class="icon">
+                                <i class="la la-clock"></i>
+                            </div>
+                            <div class="text">
+                                <h5>{% trans 'Open Hours' %}</h5>
+
+                                {% with item.weekday|weekdays__:LANG as day %}
+                                    <span>{{ day.0 }}{{ " - " }}{{ day.1 }}<br>{{ item.from_hour }}{{ ' - ' }}{{ item.to_hour }}</span>
+                                {% endwith %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row ">
+            <div class="content-map col-md-6">
+                <div style="position:relative;overflow:hidden;"><a
+                        href="https://yandex.uz/maps/10335/tashkent/?utm_medium=mapframe&utm_source=maps"
+                        style="color:#eee;font-size:12px;position:absolute;top:0px;">Ташкент</a><a
+                        href="https://yandex.uz/maps/10335/tashkent/stops/1568308432/?ll=69.234921%2C41.324807&tab=overview&utm_campaign=desktop&utm_medium=mapframe&utm_source=maps&z=17.2"
+                        style="color:#eee;font-size:12px;position:absolute;top:14px;">Чор-Су — Яндекс Карты</a>
+                    <iframe
+                            src="https://yandex.uz/map-widget/v1/?ll=69.234921%2C41.324807&masstransit%5BstopId%5D=1568308432&mode=masstransit&tab=overview&utm_campaign=desktop&utm_medium=search&utm_source=maps&z=17.2"
+                            width="100%" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe>
+                </div>
+            </div>
+            <section id="contacts" class="col-md-6">
+                <div class="wrapper p-5">
+                    <h2 class="contacts__description">{% trans 'Contact Us' %}</h2>
+                    <p class="contacts__title mt-2">{% trans 'Do you have any questions?' %}</p>
+                    <form action="{% url 'create' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="row mt-2 gy-2">
+                            <div class="col-12">
+                                <input type="text" class="input" name="full_name" placeholder="{% trans 'F.I.O' %}">
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <input type="tel" name="phone" class="input" placeholder="{% trans 'Phone number' %}">
+                            </div>
+
+                            <div class="col-md-6 col-12">
+                                <select class="input" name="id" id="products">
+                                    <option value="">{% trans 'Select a product' %}</option>
+                                    {% for pro in products %}
+                                        {% if LANG == 'uz' %}
+                                            <option name="id" value="{{ pro.id }}">{{ pro.title_uz }}</option>
+                                        {% elif LANG == 'ru' %}
+                                            <option name="id" value="{{ pro.id }}">{{ pro.title_ru }}</option>
+                                        {% elif LANG == 'en' %}
+                                            <option name="id" value="{{ pro.id }}">{{ pro.title_en }}</option>
+                                        {% endif %}
+
+                                    {% endfor %}
+
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <textarea name="message" placeholder="{% trans 'Your Message' %}"
+                                          cols="30" rows="10"
+                                          class="input"></textarea>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="col-12 text-end">
+                            <button type="submit"
+                                    class="btn btn-primary contacts__button">{% trans 'Send' %}</button>
+                        </div>
+                    </form>
+
+
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<!-- end contact -->
+
+
+<!-- footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md col-sm col-12">
+                <ul>
+                    {% for lin in about_list %}
+                        <li><a href="{{ lin.facebook_link }}" target="_blank"><i class="la la-facebook"></i></a></li>
+                        <li><a href="{{ lin.telegram_link }}" target="_blank"><i class="la la-telegram"></i></a></li>
+                        <li><a href="{{ lin.instagram_link }}" target="_blank"><i class="la la-instagram"></i></a></li>
+                        <li><a href="{{ lin.youtube_link }}" target="_blank"><i class="la la-youtube"></i></a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md col-sm col-12">
+                Copyright © All Right Reserved
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end footer -->
+
+
+<!-- script -->
+{% block ga %}
+    {% get_from_settings 'USE_GA' as use_ga %}
+    {% if use_ga %}
+        {% include "snippets/ga.html" with ga_tracking_id=ga_tracking_id %}
+    {% endif %}
+{% endblock ga %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/fakeLoader.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/jquery.filterizr.min.js' %}"></script>
+<script src="{% static 'js/magnific-popup.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script src='https://code.jquery.com/jquery-1.11.0.min.js'></script>
+<script src='https://code.jquery.com/jquery-migrate-1.2.1.min.js'></script>
+<script src='https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js'></script>
+<script>
+    $('.slick-carousel').slick({
+        vertical: true,
+        verticalSwiping: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: true,
+        speed: 10000,
+        mouseDrag: true,
+        cssEase: 'linear',
+        infinite: true,
+        arrows: false,
+        touchMove: true,
+        swipeToSlide: true,
+        swipe: true,
+
+    })
+</script>
+
+</body>
+
+</html>

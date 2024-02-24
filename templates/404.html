@@ -1,0 +1,67 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Not Found</title>
+
+    <style>
+        /* Styles for the 404 page */
+        .page_404 {
+            padding: 40px 0;
+            background: #fff;
+            font-family: 'Arvo', serif;
+            text-align: center;
+        }
+
+        .four_zero_four_bg {
+            background-image: url('/static/2024-02-2221.29.17-ezgif.com-video-to-gif-converter.gif');
+            height: 400px;
+            width: auto;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .four_zero_four_bg h1,
+        .four_zero_four_bg h3 {
+            font-size: 80px;
+            margin: 0;
+        }
+
+        .contant_box_404 {
+            margin-top: -50px;
+        }
+
+        .link_404 {
+            color: #fff;
+            padding: 10px 20px;
+            background: #79A6FF;
+            margin: 20px 0;
+            display: inline-block;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<section class="page_404">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <div class="four_zero_four_bg">
+
+                    </div>
+                    <div class="contant_box_404">
+                        <h3>Look like you're lost</h3>
+                        <p>The page you are looking for is not available!</p>
+                        <a href="{% url 'index' %}" class="link_404">Go to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

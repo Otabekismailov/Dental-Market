@@ -198,7 +198,7 @@ class Contacts(BaseModel):
 
 
 class ApplicationForm(BaseModel):
-    last_name = models.CharField(max_length=255)
+    full_name = models.CharField(max_length=255)
     first_name = models.CharField(max_length=255)
     phone = models.CharField(max_length=255)
     message = models.TextField(null=True, blank=True)
@@ -207,3 +207,46 @@ class ApplicationForm(BaseModel):
     class Meta:
         verbose_name_plural = 'Xabar'
         verbose_name = 'Xabar'
+
+
+class Testimonial(BaseModel):
+    title = models.CharField(max_length=255)
+    description = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.title
+
+
+class TestimonialUser(BaseModel):
+    full_name = models.CharField(max_length=255)
+    description = models.TextField(null=True, blank=True)
+    image = models.ImageField(upload_to='testimonial/', null=True, blank=True)
+    testimonial = models.ForeignKey(Testimonial, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.full_name
+
+    def image_tag(self):
+        if self.image:
+            return mark_safe(f'<a href="{self.image.url}"><img src="{self.image.url}" style="height:40px;"/></a>')
+        return 'no_image'
+
+
+class Banners(BaseModel):
+    title = models.CharField(max_length=255)
+    short_description = models.TextField(null=True, blank=True)
+    image_1 = models.ImageField(upload_to='banners/', null=True, blank=True)
+    image_2 = models.ImageField(upload_to='banners/', null=True, blank=True)
+
+    def __str__(self):
+        return self.title
+
+    def image_tag_1(self):
+        if self.image_1:
+            return mark_safe(f'<a href="{self.image_1.url}"><img src="{self.image_1.url}" style="height:40px;"/></a>')
+        return 'no_image'
+
+    def image_tag_2(self):
+        if self.image_2:
+            return mark_safe(f'<a href="{self.image_2.url}"><img src="{self.image_2.url}" style="height:40px;"/></a>')
+        return 'no_image'

@@ -1,8 +1,9 @@
 from django.contrib import admin
 
-from common.models import Weekdays, Weekends, About, ClinicMember, Services, Products, Contacts, ApplicationForm
+from common.models import Weekdays, Weekends, About, ClinicMember, Services, Products, Contacts, ApplicationForm, \
+    WEEKDAYS_UZ, Testimonial, TestimonialUser, Banners
 from django.utils.text import slugify, gettext_lazy as _
-from modeltranslation.admin import TranslationAdmin
+from modeltranslation.admin import TranslationAdmin, TranslationStackedInline
 
 
 # Register your models here.
@@ -57,11 +58,24 @@ class AboutAdmin(TranslationAdmin):
 @admin.register(ClinicMember)
 class ClinicMemberAdmin(TranslationAdmin):
     list_display = ("id",
-                    "last_name", "first_name", "middle_name", "description", "images_tag", "telegram_link",
-                    "instagram_link",
-                    "facebook_link",)
+                    "last_name", "first_name", "middle_name", "description", "images_tag",)
     list_filter = ("last_name", "first_name", "middle_name",)
     search_fields = ("last_name", "first_name",)
+    group_fieldsets = True
+
+    fieldsets = [
+        (_('Mutaxasislar'), {
+            'classes': [],
+
+            'fields': (
+                ("last_name", "first_name", "middle_name", "description", "image"),
+            ),
+        }),
+        (None, {
+            'classes': ['empty-form'],
+            'fields': ('telegram_link', 'instagram_link', 'facebook_link',),
+        }),
+    ]
 
 
 @admin.register(Services)
@@ -94,12 +108,56 @@ class ProductsAdmin(TranslationAdmin):
 
 @admin.register(Contacts)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ("id", "address", "phone", "email", "weekday", "weekends", "from_hour", "to_hour",)
+    list_display = ("id", "address", "phone", "email", "weekday_day", "weekends_day", "from_hour", "to_hour",)
+
+    def weekday_day(self, obj):
+        f = ''
+        t = ''
+        data = obj.weekday
+        for k, v in WEEKDAYS_UZ:
+            if k == data.from_weekday_uz:
+                f += v
+            if k == data.to_weekday_uz:
+                t += v
+        return f'{f} - {t}'
+
+    def weekends_day(self, obj):
+        f = ''
+        data = obj.weekends
+        for k, v in WEEKDAYS_UZ:
+            if k == data.week_uz:
+                f += v
+
+        return f'{f}'
 
 
 @admin.register(ApplicationForm)
 class ApplicationFormAdmin(admin.ModelAdmin):
-    list_display = ("id", "last_name", "first_name", "phone", "message", 'product')
-    list_filter = ("id", "last_name", "phone", "first_name",)
-    search_fields = ("last_name", "first_name", "phone",)
+    list_display = ("id", "full_name", "phone", "message", 'product')
+    list_filter = ("id", "full_name", "phone",)
+    search_fields = ("full_name", "phone",)
     ordering = ("-id",)
+
+
+@admin.register(TestimonialUser)
+class TestimonialUserAdmin(TranslationAdmin):
+    list_display = ("id", "full_name", "description", "image_tag", 'image')
+
+
+class TestimonialUserStackedInline(TranslationStackedInline):
+    model = TestimonialUser
+    extra = 1
+
+
+@admin.register(Testimonial)
+class TestimonialAdmin(TranslationAdmin):
+    list_display = ("id", "title", "description",)
+    actions = ['make_published']
+    inlines = [TestimonialUserStackedInline]
+
+    group_fieldsets = True
+
+
+@admin.register(Banners)
+class BannersAdmin(TranslationAdmin):
+    list_display = ("id", "title", "short_description", 'image_tag_1', 'image_tag_2',)

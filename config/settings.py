@@ -36,7 +36,7 @@ DEBUG = env('DEBUG')
 # exception if SECRET_KEY not in os.environ
 SECRET_KEY = env('SECRET_KEY')
 
-ALLOWED_HOSTS = ['0.0.0.0:8000', '0.0.0.0']
+ALLOWED_HOSTS = ['0.0.0.0:8000', '0.0.0.0', '127.0.0.1']
 
 # Application definition
 
@@ -49,17 +49,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     'corsheaders',
 
     # Apps,
     'common.apps.CommonConfig',
 ]
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  # new
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -69,6 +72,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
+GA_TRACKING_ID = env("GA_ID")
+FACEBOOK_PIXEL_ID = env("FACEBOOK_PIXEL_ID")
+USE_GA = env('DJANGO_USE_GA')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -80,7 +86,14 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'common.context_processor.lang_context_processor',
+                'common.context_processor.ga_tracking_id',
+                'common.context_processor.use_ga',
             ],
+            'builtins': [
+
+                'common.templatetags.tags',
+            ]
         },
     },
 ]
@@ -156,13 +169,26 @@ PARLER_LANGUAGES = {
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
+#
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
+#
+# MEDIA_URL = 'media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
 STATIC_URL = '/static/'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
 TEMPLATE_DEBUG = True
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

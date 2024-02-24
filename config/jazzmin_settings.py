@@ -39,7 +39,7 @@ JAZZMIN_SETTINGS = {
 
     # Field name on accounts model that contains avatar ImageField/URLField/Charfield or a callable that receives the accounts
     "user_avatar": None,
-    "language_chooser": False,
+    "language_chooser": True,
 
     "show_sidebar": True,
 
