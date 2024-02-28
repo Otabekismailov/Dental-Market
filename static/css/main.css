@@ -1,5 +1,40 @@
+.navbar {
+    position: sticky;
+}
+
+.language__button {
+    background-color: transparent;
+    padding: 8px 12px;
+    outline: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: capitalize;
+}
+
+
+.subheader .button-navbar {
+    color: #06a3db;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.subheader .button-navbar i {
+    color: #06a3db;
+    font-size: 20px;
+
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    margin-right: 10px;
+}
+
 .card {
-    border-radius: 20px;
+    border-radius: 16px;
     position: relative;
     transition: all 0.3s ease;
     background-color: #f4f6f9;
@@ -14,8 +49,28 @@
 }
 
 .card__image img {
-    border-radius: 20px 20px 0 0;
+    border-radius: 16px 16px 0 0;
     object-fit: contain;
+}
+
+.card__image i {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 72px;
+    color: white;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card__image:hover i {
+    opacity: 1;
+
 }
 
 .card__image .mantine-Skeleton-root {
@@ -23,7 +78,7 @@
 }
 
 .card__body {
-    padding: 14px 16px 16px 16px;
+    padding: 14px 16px 24px 16px;
 }
 
 .card__body h4 {
@@ -85,7 +140,7 @@
     margin-bottom: 0;
     border-radius: 0;
     box-shadow: none;
-    height: 558px;
+    height: 100%;
 }
 
 .contact .content-map {
@@ -118,6 +173,27 @@ footer .row {
     padding: 30px 0;
 }
 
+.header-info.mobile {
+    display: none;
+}
+
+.navbar {
+    padding: 16px 15px;
+}
+
+.navbar .navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0.5125rem;
+}
+
+.contact .content {
+    padding: 30px 30px 15px 30px;
+}
+
+#our-team {
+    padding-top: 120px;
+}
+
 .contacts__title {
     color: rgb(51, 51, 51);
     font-weight: 400;
@@ -133,6 +209,7 @@ footer .row {
     line-height: 28px;
     letter-spacing: 0.01em;
     margin: 0;
+    color: #06a3db;
 }
 
 .contacts__button {
@@ -146,6 +223,47 @@ footer .row {
     padding: 12px 24px;
     border-radius: 16px;
     color: white;
+}
+
+.about .content-left_wrapper span {
+    display: none;
+}
+
+.expert .title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.expert .team-member-t-head {
+    text-align: center;
+}
+
+.expert .team-member-description {
+    text-align: center;
+    font-size: 13px;
+}
+
+.expert .team-member {
+    border: 2px;
+    background-color: #f9fcff;
+    border-radius: 10px;
+}
+
+.expert .team-member-content {
+    padding: 8px 12px;
+}
+
+.expert .img {
+    padding: 8px;
+}
+
+.expert .img img {
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.navbar .navbar-nav {
+    margin-right: unset;
 }
 
 @media (max-width: 1200px) {
@@ -164,9 +282,63 @@ footer .row {
 }
 
 @media (max-width: 992px) {
+    .subheader {
+        display: none;
+    }
+
+    #our-team {
+        padding-top: 60px;
+    }
+
+    .contact .content .text span {
+        white-space: pre-line;
+    }
+
+    .expert .title {
+        margin-bottom: 20px;
+    }
+
+    .contacts__title {
+        font-weight: 500;
+        font-size: 34px;
+        line-height: 42px;
+    }
+
+    .navbar {
+        padding: 16px 0;
+    }
+
+    .navbar .navbar-brand {
+        padding-bottom: 0;
+    }
+
+    .header-info.mobile {
+        display: flex;
+        justify-content: center;
+    }
+
+    .header-info.mobile .language__button {
+        padding: 8px 10px;
+        gap: 4px;
+        color: white;
+    }
+
+    .navbar .button-navbar {
+        display: none;
+    }
+
     .card__price p {
         font-size: 18px;
         line-height: 22px;
+    }
+
+    .intro {
+        padding: 40px 0 160px;
+    }
+
+    .contact iframe {
+
+        height: 500px;
     }
 }
 
@@ -200,6 +372,51 @@ footer .row {
 }
 
 @media (max-width: 576px) {
+    .intro h1 {
+        font-size: 35px;
+        font-weight: 500;
+        line-height: 44px;
+    }
+
+    .about {
+        padding-top: 60px;
+    }
+
+    .about h2 {
+        margin-top: 3px;
+    }
+
+    .products {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    .testimonial {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    .services {
+        padding: 60px 0;
+    }
+
+    .services .content {
+        box-shadow: 0 12px 30px -15px rgba(0, 0, 0, 0.2);
+    }
+
+
+    .contact {
+        padding-top: 60px;
+    }
+
+    .about .content-left {
+        margin-right: 50px;
+    }
+
+    .about .content-left_wrapper {
+        margin-right: -50px;
+    }
+
     .card__link {
         cursor: none;
     }
@@ -209,58 +426,6 @@ footer .row {
         line-height: 18px;
         min-height: 37px;
     }
-}
-
-.expert {
-    padding-top: 15px;
-}
-
-.expert .title {
-    text-align: center;
-}
-
-.expert .team-member-t-head {
-    text-align: center;
-}
-
-.expert .team-member-description {
-    text-align: center;
-    font-size: 13px;
-}
-
-.expert .team-member {
-    border: 2px;
-    background-color: #f9fcff;
-    border-radius: 10px;
-}
-
-.expert .team-member-content {
-    padding: 8px 12px;
-}
-
-.expert .img {
-    padding: 8px;
-}
-
-.expert .img img {
-    object-fit: cover;
-    border-radius: 12px;
-}
-
-.navbar {
-    padding: 16px 15px;
-}
-
-.language {
-    display: flex;
-    align-items: stretch;
-    gap: 4px;
-    justify-content: space-between;
-}
-
-.language .lang {
-    color: #f4f6f9;
-    font-size: 12px;
 }
 
 
@@ -377,6 +542,45 @@ footer .row {
     -webkit-transform: translateY(0);
     transform: translateY(0);
 }
+
 .slick-carousel img {
-  width: 200px;
-  }
+    width: 200px;
+}
+
+
+.mfp-fade.mfp-bg {
+    opacity: 0;
+
+    -webkit-transition: all 0.15s ease-out;
+    -moz-transition: all 0.15s ease-out;
+    transition: all 0.15s ease-out;
+}
+
+/* overlay animate in */
+.mfp-fade.mfp-bg.mfp-ready {
+    opacity: 0.8;
+}
+
+/* overlay animate out */
+.mfp-fade.mfp-bg.mfp-removing {
+    opacity: 0;
+}
+
+/* content at start */
+.mfp-fade.mfp-wrap .mfp-content {
+    opacity: 0;
+
+    -webkit-transition: all 0.15s ease-out;
+    -moz-transition: all 0.15s ease-out;
+    transition: all 0.15s ease-out;
+}
+
+/* content animate it */
+.mfp-fade.mfp-wrap.mfp-ready .mfp-content {
+    opacity: 1;
+}
+
+/* content animate out */
+.mfp-fade.mfp-wrap.mfp-removing .mfp-content {
+    opacity: 0;
+}

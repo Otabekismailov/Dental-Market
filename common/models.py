@@ -133,6 +133,22 @@ class Products(BaseModel):
         verbose_name = 'Mahsulotlar'
 
 
+class ProductImages(BaseModel):
+    product = models.ForeignKey(Products, on_delete=models.SET_NULL, null=True, related_name='product_images',
+                                verbose_name="Mahsulot rasmlari")
+    images = models.ImageField(upload_to='product/', null=True, blank=True)
+
+    def __str__(self):
+        if self.images:
+            return self.images.url
+        return 'non_file'
+
+    def image_tag(self):
+        if self.image:
+            return mark_safe(f'<a href="{self.image.url}"><img src="{self.image.url}" style="height:40px;"/></a>')
+        return 'no_image'
+
+
 class Weekdays(BaseModel):
     from_weekday_uz = models.IntegerField(choices=WEEKDAYS_UZ, verbose_name="Qaysi haftadan")
     to_weekday_uz = models.IntegerField(choices=WEEKDAYS_UZ, verbose_name="Qaysi Haftagacha")

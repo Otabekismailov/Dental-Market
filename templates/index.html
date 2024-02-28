@@ -6,13 +6,71 @@
 <html lang="uz">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0283XP211D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', '{{ ga_tracking_id }}', 'auto');
+    </script>
+    <!-- Facebook Pixel Code -->
+    {% if  facebook_pixel_id %}
+        <script>
+            !function (f, b, e, v, n, t, s) {
+                if (f.fbq) return;
+                n = f.fbq = function () {
+                    n.callMethod ?
+                        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                };
+                if (!f._fbq) f._fbq = n;
+                n.push = n;
+                n.loaded = !0;
+                n.version = '2.0';
+                n.queue = [];
+                t = b.createElement(e);
+                t.async = !0;
+                t.src = v;
+                s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s)
+            }(window,
+                document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+            // Line to enable Manual Only mode.
+            fbq('set', 'autoConfig', false, 'FB_PIXEL_ID');
+            //Insert Your Facebook Pixel ID below. 
+            fbq('init', '{{ facebook_pixel_id }}');
+            fbq('track', 'PageView');
+        </script>
+        <noscript>
+            <img height="1" width="1" style="display:none"
+                 src="https://www.facebook.com/tr?id={{ facebook_pixel_id }}&amp;ev=PageView&amp;noscript=1"/>
+        </noscript>
+    {% endif %}
+
+    <!-- End Facebook Pixel Code -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}">
-    <title>Dentare</title>
+    {#    <link rel="shortcut icon" href="{% static 'img/logo.png' ">#}
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static '/img/redketchup/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static '/img/redketchup/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static '/img/redketchup/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static '/img/redketchup/site.webmanifest' %}">
+    <title>Zygoma</title>
     <link rel='stylesheet' href='http://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css'>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="O’zbekiston stomatologlarini qulay narxda sifatli va innovatsion mahsulotlar bilan ta’minlash – Zygoma kompaniyasining missiyasi.
+Eksklyuziv distributor bo’lganimiz uchun, Sizga ehtiyojingizdan kelib chiqqan holda qulay shartlar yaratib beramiz. Istalgan turdagi to’lov usuli hamda tezkor bepul yetkazib berish xizmati Sizning ish jarayoningizni yanaqa maroqli qiladi.">
+    <meta property="og:image" content="{% static 'img/logo.png' %}">
+    <meta property="og:url" content="https://www.zgoma.uz">
+    <meta name="keywords" content="O’zbekiston stomatologlarini qulay narxda sifatli va innovatsion mahsulotlar bilan ta’minlash – Zygoma kompaniyasining missiyasi.
+Eksklyuziv distributor bo’lganimiz uchun, Sizga ehtiyojingizdan kelib chiqqan holda qulay shartlar yaratib beramiz. Istalgan turdagi to’lov usuli hamda tezkor bepul yetkazib berish xizmati Sizning ish jarayoningizni yanaqa maroqli qiladi.">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/fakeLoader.css' %}">
     <link rel="stylesheet" href="{% static 'css/line-awesome.min.css' %}">
@@ -36,11 +94,63 @@
 </div>
 <!-- end preloader -->
 
+<!--  Language -->
+<section class="subheader">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                {% for pho in contact %}
+                    <a href="tel: {{ pho.phone }}" class="button-navbar">
+                        <i class="la la-phone"></i>{{ pho.phone }}
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="col-md-6">
+                <div class="header-info header-info-right">
+
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+
+                        <form action="{% url 'set_language' %}" method="post" id="form_{{ language.code }}"
+                              style="display:inline!important;">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="{{ redirect_to }}"/>
+                            <input name="language" type="hidden" value="{{ language.code }}"/>
+                        </form>
+                        <button class="language__button {% if url == language.code %}active{% endif %}"
+                                type="submit"
+                                form="form_{{ language.code }}"
+                                value="Submit">
+                            {% if language.code == 'uz' %}
+                                <img src="{% static '' %}../static/img/uz.png" alt="Uzbek" width="20px"
+                                     style="width: 20px; height: 14px">
+
+                            {% elif language.code == 'ru' %}
+                                <img src="{% static '' %}../static/img/ru.png" alt="Русский" width="20px"
+                                     style="width: 20px; height: 14px;">
+                            {% else %}
+                                <img src="{% static '' %}../static/img/en.png" alt="English"
+                                     style="width: 20px; height: 14px;"
+                                     width="20px">
+
+                            {% endif %}{{ language.name_local }}
+
+                        </button>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /end Language -->
 
 <!-- navbar -->
 <div id="navbar" class="navbar navbar-expand-lg justify-content-center align-items-center">
     <div class="container">
-        <a href="#" class="navbar-brand"><img src="{% static 'img/logo.png' %}" alt=""></a>
+        <a href="#" class="navbar-brand"><img src="{% static 'img/logo.png' %}" alt="Zygoma"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -51,62 +161,50 @@
             <ul class="navbar-nav nav">
                 <li class="nav-item"><a class="nav-link" href="#home">{% trans 'Home' %}</a></li>
                 <li class="nav-item"><a class="nav-link" href="#about">{% trans 'About' %}</a></li>
-                <li class="nav-item"><a class="nav-link" href="#services">{% trans 'Services' %}</a></li>
+                <li class="nav-item"><a class="nav-link" href="#products">{% trans 'Products' %}</a></li>
                 <li class="nav-item"><a class="nav-link" href="#testimonial">{% trans 'Testimonial' %}</a></li>
+                <li class="nav-item"><a class="nav-link" href="#our-team">{% trans 'Our team' %}</a></li>
+                <li class="nav-item"><a class="nav-link" href="#partners">{% trans 'Partners' %}</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">{% trans 'Contact Us' %}</a></li>
             </ul>
-        </div>
+            <div class="header-info mobile header-info-right">
 
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
 
-        <ul class="button-navbar">
-            {% for pho in contact %}
-                <li><i class="la la-phone"></i>{{ pho.phone }}</li>
-            {% endfor %}
-        </ul>
+                    <form action="{% url 'set_language' %}" method="post" id="form_{{ language.code }}"
+                          style="display:inline!important;">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}"/>
+                        <input name="language" type="hidden" value="{{ language.code }}"/>
+                    </form>
+                    <button class="language__button {% if url == language.code %}active{% endif %}"
+                            type="submit"
+                            form="form_{{ language.code }}"
+                            value="Submit">
+                        {% if language.code == 'uz' %}
+                            <img src="{% static '' %}../static/img/uz.png" alt="Uzbek" width="20px"
+                                 style="width: 20px; height: 14px">
 
-    </div>
+                        {% elif language.code == 'ru' %}
+                            <img src="{% static '' %}../static/img/ru.png" alt="Русский" width="20px"
+                                 style="width: 20px; height: 14px;">
+                        {% else %}
+                            <img src="{% static '' %}../static/img/en.png" alt="English"
+                                 style="width: 20px; height: 14px;"
+                                 width="20px">
 
-    <!--  Language -->
-    <div class="col-xl-3 col-lg-4">
-        <div class="header-info header-info-right">
+                        {% endif %}{{ language.name_local }}
 
-            {% get_current_language as LANGUAGE_CODE %}
-            {% get_available_languages as LANGUAGES %}
-            {% get_language_info_list for LANGUAGES as languages %}
-            {% for language in languages %}
+                    </button>
+                {% endfor %}
 
-                <form action="{% url 'set_language' %}" method="post" id="form_{{ language.code }}"
-                      style="display:inline!important;">
-                    {% csrf_token %}
-                    <input name="next" type="hidden" value="{{ redirect_to }}"/>
-                    <input name="language" type="hidden" value="{{ language.code }}"/>
-                </form>
-
-                <button class="buttonhover button {% if url == language.code %}active{% endif %}"
-                        type="submit"
-                        form="form_{{ language.code }}"
-                        value="Submit"
-                        style="padding: 12px 10px">
-                    {% if language.code == 'uz' %}
-                        <img src="{% static '' %}../static/img/uz.png" alt="logo" width="20px"
-                             style="width: 20px; height: 14px">
-
-                    {% elif language.code == 'ru' %}
-                        <img src="{% static '' %}../static/img/ru.png" alt="logo" width="20px"
-                             style="width: 20px; height: 14px;">
-                    {% else %}
-                        <img src="{% static '' %}../static/img/en.png" alt="logo"
-                             style="width: 20px; height: 14px;"
-                             width="20px">
-
-                    {% endif %}{{ language.code }}
-
-                </button>
-            {% endfor %}
+            </div>
 
         </div>
     </div>
-    <!-- /end Language -->
 </div>
 
 <!-- end navbar -->
@@ -158,19 +256,21 @@
             <div class="col-md-5">
 
                 <div class="content-left"
-                     style="background-image: url('{% for im in about_list %}{{ im.image.url }} {% endfor %}');">
+                     style="background-image: url('{% for im in about_list %}{{ im.video_image.url }} {% endfor %}');">
                     <div class="position-relative content-left_wrapper">
                         {% for  ima in about_list %}
-                            <a href="{{ ima.url }}" class="video video-popup mfp-iframe"><img
-                                    src="{{ ima.video_image.url }}" alt=""></a>
+                            <a href="{{ ima.url }}" class="video video-popup mfp-iframe">
+                                <img src="{{ ima.image.url }}" alt="">
+                            </a>
 
 
                             <span class="playIcon">
-                                    <a href="{{ ima.url }}" class="video video-popup mfp-iframe"><svg width="24"
-                                                                                                      height="24"
-                                                                                                      viewBox="0 0 24 24"
-                                                                                                      fill="#1a76d1"
-                                                                                                      xmlns="http://www.w3.org/2000/svg">
+                                    <a href="{{ ima.url }}" class="video video-popup mfp-iframe">
+                                        <svg width="24"
+                                             height="24"
+                                             viewBox="0 0 24 24"
+                                             fill="#1a76d1"
+                                             xmlns="http://www.w3.org/2000/svg">
                                         <path
                                                 d="M5 5.27392C5 3.56707 6.82609 2.48176 8.32538 3.29755L20.687 10.0237C22.2531 10.8759 22.2531 13.1243 20.687 13.9764L8.32538 20.7026C6.82609 21.5184 5 20.4331 5 18.7262V5.27392Z"></path>
                                     </svg></a>
@@ -195,30 +295,30 @@
                         <h2>{{ item.about_title }}</h2>
                         <p>{{ item.about_description }}</p>
                     {% endfor %}
-                    <div class="row">
-                        <div class="col">
-                            <div class="content-icon">
-                                <div class="icon">
-                                    <i class="la la-hand-holding-usd"></i>
-                                </div>
-                                <div class="text">
-                                    <h6>{% trans 'Affordable' %} <br>{% trans 'Prices' %}</h6>
-                                    <p>{% trans 'Lorem, ipsum dolor sit amet consectetur, adipisicing elit.' %} </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="content-icon">
-                                <div class="icon">
-                                    <i class="la la-tooth"></i>
-                                </div>
-                                <div class="text">
-                                    <h6>{% trans 'Dental' %}<br>{% trans 'Specialist' %}</h6>
-                                    <p>{% trans 'Lorem, ipsum dolor sit amet consectetur, adipisicing elit.' %} </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+{#                    <div class="row">#}
+{#                        <div class="col">#}
+{#                            <div class="content-icon">#}
+{#                                <div class="icon">#}
+{#                                    <i class="la la-hand-holding-usd"></i>#}
+{#                                </div>#}
+{#                                <div class="text">#}
+{#                                    <h6>{% trans 'The chosen payment method is implemented' %}</h6>#}
+                                    {#                                    <p>{% trans 'Any type of payment method and fast free delivery service will make your work process more enjoyable.' %} </p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="col">#}
+{#                            <div class="content-icon">#}
+{#                                <div class="icon">#}
+{#                                    <i class="la la-tooth"></i>#}
+{#                                </div>#}
+{#                                <div class="text">#}
+{#                                    <h6>{% trans 'Dental' %}<br>{% trans 'Specialist' %}</h6>#}
+                                    {#                                    <p>{% trans 'Lorem, ipsum dolor sit amet consectetur, adipisicing elit.' %} </p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
                 </div>
             </div>
 
@@ -231,7 +331,7 @@
 
 
 <!-- products -->
-<section class="products">
+<section class="products" id="products">
     <div class="container">
         <span class="span-title">{% trans 'Products' %}</span>
         <h2 class="text-center">{% trans 'Our products' %}</h2>
@@ -242,7 +342,7 @@
                     <div class="card">
 
                         <div class="card__image">
-                            <img alt="Allinsan LLC" loading="lazy" decoding="async" data-nimg="fill" sizes="100vw"
+                            <img alt="Zygoma" loading="lazy" decoding="async" data-nimg="fill" sizes="100vw"
                                  src="{{ item.image.url }}" style="
                           position: absolute;
                           height: 100%;
@@ -250,6 +350,7 @@
                           inset: 0;
                           color: transparent;
                         "/>
+                            <i class="la la-camera"></i>
                         </div>
                         <div class="card__body">
                             <h4 class="mantine-focus-auto m-b6d8b162 mantine-Text-root" data-line-clamp="true"
@@ -263,12 +364,20 @@
 
                                 {% endif %}
                             </h4>
-                            <div class="card__price">
-                                <h5>{{ item.price }}</h5>
-                                <p>{% trans "USD" %}</p>
-                            </div>
+                            {#                            <div class="card__price">#}
+                            {#                                <h5>{{ item.price }}</h5>#}
+                            {#                                <p>{% trans "USD" %}</p>#}
+                            {#                            </div>#}
                         </div>
+                        <div class="card__images">
 
+                            {% for image in item.product_images.all %}
+                                <a href="{{ image }}">
+
+                                </a>
+                            {% endfor %}
+
+                        </div>
                     </div>
 
                 </div>
@@ -336,11 +445,11 @@
 </div>
 <!-- end testimonial -->
 <!-- Members -->
-<section id="our-team" class="block spacer p-top-xl">
+<section id="our-team" class="block spacer">
     <div class="container">
         <div class="expert">
             <div class="title text-max-width">
-                <h2>{% trans 'We are Dental Healthcare Professionals' %}</h2>
+                <h2>{% trans 'Our experts' %}</h2>
             </div>
 
             <div class="expert-list owl-carousel with-pb-md  ">
@@ -378,7 +487,7 @@
 </section>
 <!-- /end Members -->
 <!-- start brands -->
-<section id="services" class="services">
+<section id="partners" class="services">
     <div class="container">
         <span class="span-title">{% trans 'Partners' %}</span>
         <h2 class="text-center">{% trans 'Our partners' %}</h2>
@@ -407,7 +516,7 @@
 <!-- end brands -->
 
 <!-- contact -->
-<div id="contact" class="contact">
+<div class="contact">
     <div class="container">
 
         <div class="content-box">
@@ -455,7 +564,8 @@
                                 <h5>{% trans 'Open Hours' %}</h5>
 
                                 {% with item.weekday|weekdays__:LANG as day %}
-                                    <span>{{ day.0 }}{{ " - " }}{{ day.1 }}<br>{{ item.from_hour }}{{ ' - ' }}{{ item.to_hour }}</span>
+                                    <span>{{ day.0 }}{{ " - " }}{{ day.1 }}
+                                        {{ item.from_hour }}{{ ' - ' }}{{ item.to_hour }}</span>
                                 {% endwith %}
                             </div>
                         </div>
@@ -464,35 +574,38 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="row ">
+    <div class="container-fluid" id="contact">
+        <div class="row">
             <div class="content-map col-md-6">
-                <div style="position:relative;overflow:hidden;"><a
-                        href="https://yandex.uz/maps/10335/tashkent/?utm_medium=mapframe&utm_source=maps"
-                        style="color:#eee;font-size:12px;position:absolute;top:0px;">Ташкент</a><a
-                        href="https://yandex.uz/maps/10335/tashkent/stops/1568308432/?ll=69.234921%2C41.324807&tab=overview&utm_campaign=desktop&utm_medium=mapframe&utm_source=maps&z=17.2"
-                        style="color:#eee;font-size:12px;position:absolute;top:14px;">Чор-Су — Яндекс Карты</a>
-                    <iframe
-                            src="https://yandex.uz/map-widget/v1/?ll=69.234921%2C41.324807&masstransit%5BstopId%5D=1568308432&mode=masstransit&tab=overview&utm_campaign=desktop&utm_medium=search&utm_source=maps&z=17.2"
-                            width="100%" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe>
+                <div style="position:relative;overflow:hidden;">
+                    <a href="https://yandex.uz/maps/10335/tashkent/?utm_medium=mapframe&utm_source=maps&lang={{ LANG }}"
+                       style="color:#eee;font-size:12px;position:absolute;top:0px;">Ташкент</a><a
+                        href="https://yandex.uz/maps/10335/tashkent/house/YkAYdA9nTEUAQFprfX90dXtrZw==/?from=mapframe&ll=69.287524%2C41.354849&utm_medium=mapframe&utm_source=maps&z=20.83&lang={{ LANG }}"
+                        style="color:#eee;font-size:12px;position:absolute;top:14px;">Проспект Амира Темура, 129 —
+                    Яндекс Карты</a>
+                    <iframe src="https://yandex.uz/map-widget/v1/?from=mapframe&ll=69.287524%2C41.354849&mode=whatshere&whatshere%5Bpoint%5D=69.287407%2C41.354640&whatshere%5Bzoom=1%5D=17&z=20.83&lang={{ LANG }}"
+                            frameborder="1" allowfullscreen="true" style="position:relative;"></iframe>
                 </div>
             </div>
-            <section id="contacts" class="col-md-6">
-                <div class="wrapper p-5">
+            <section id="contacts" class="col-md-6 order-md-last order-first">
+                <div class="wrapper p-2 p-md-5">
                     <h2 class="contacts__description">{% trans 'Contact Us' %}</h2>
                     <p class="contacts__title mt-2">{% trans 'Do you have any questions?' %}</p>
-                    <form action="{% url 'create' %}" method="POST">
+                    <form id="application">
                         {% csrf_token %}
                         <div class="row mt-2 gy-2">
                             <div class="col-12">
-                                <input type="text" class="input" name="full_name" placeholder="{% trans 'F.I.O' %}">
+                                <input type="text" class="input" name="full_name" required
+                                       placeholder="{% trans 'F.I.O' %}">
                             </div>
                             <div class="col-md-6 col-12">
-                                <input type="tel" name="phone" class="input" placeholder="{% trans 'Phone number' %}">
+                                <input type="tel" name="phone" id="phone_number" class="input"
+                                       required placeholder="{% trans 'Phone number' %}">
                             </div>
 
+
                             <div class="col-md-6 col-12">
-                                <select class="input" name="id" id="products">
+                                <select class="input" name="id" id="products" required>
                                     <option value="">{% trans 'Select a product' %}</option>
                                     {% for pro in products %}
                                         {% if LANG == 'uz' %}
@@ -515,10 +628,8 @@
 
 
                         </div>
-
-
-                        <div class="col-12 text-end">
-                            <button type="submit"
+                        <div class="col-12 text-end mt-3">
+                            <button id="application_btn" type="submit"
                                     class="btn btn-primary contacts__button">{% trans 'Send' %}</button>
                         </div>
                     </form>
@@ -549,7 +660,7 @@
                     {% endfor %}
                 </ul>
             </div>
-            <div class="col-md col-sm col-12">
+            <div class="col-md col-sm col-12 text-white">
                 Copyright © All Right Reserved
             </div>
         </div>
@@ -571,10 +682,11 @@
 <script src="{% static 'js/jquery.filterizr.min.js' %}"></script>
 <script src="{% static 'js/magnific-popup.min.js' %}"></script>
 <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-<script src="{% static 'js/main.js' %}"></script>
-<script src='https://code.jquery.com/jquery-1.11.0.min.js'></script>
-<script src='https://code.jquery.com/jquery-migrate-1.2.1.min.js'></script>
 <script src='https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="{% static 'js/main.js' %}"></script>
+
 <script>
     $('.slick-carousel').slick({
         vertical: true,
@@ -592,7 +704,7 @@
         swipeToSlide: true,
         swipe: true,
 
-    })
+    });
 </script>
 
 </body>

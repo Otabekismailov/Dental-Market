@@ -89,6 +89,7 @@ TEMPLATES = [
                 'common.context_processor.lang_context_processor',
                 'common.context_processor.ga_tracking_id',
                 'common.context_processor.use_ga',
+                'common.context_processor.facebook_id',
             ],
             'builtins': [
 
@@ -143,7 +144,7 @@ USE_TZ = True
 LANGUAGES = (
     ('en', _('English')),
     ('uz', _('Uzbek')),
-    ('ru', _('Russian')),
+    ('ru', _('Русский')),
 )
 LOCALE_PATHS = [
     BASE_DIR / 'locale/',

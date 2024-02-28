@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from common.models import Weekdays, Weekends, About, ClinicMember, Services, Products, Contacts, ApplicationForm, \
-    WEEKDAYS_UZ, Testimonial, TestimonialUser, Banners
+    WEEKDAYS_UZ, Testimonial, TestimonialUser, Banners, ProductImages
 from django.utils.text import slugify, gettext_lazy as _
 from modeltranslation.admin import TranslationAdmin, TranslationStackedInline
 
@@ -99,12 +99,17 @@ class ServicesAdmin(TranslationAdmin):
     ]
 
 
+class ProductImageAdmin(admin.StackedInline):
+    model = ProductImages
+    extra = 1
+
+
 @admin.register(Products)
 class ProductsAdmin(TranslationAdmin):
     list_display = ("id", "title", "short_description", "image_tag", "price", "count")
     list_filter = ("id", "title")
     search_fields = ("title",)
-
+    inlines = [ProductImageAdmin]
 
 @admin.register(Contacts)
 class ContactAdmin(admin.ModelAdmin):

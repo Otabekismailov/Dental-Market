@@ -1,11 +1,10 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-
+from django.http import JsonResponse
 from common.context_processor import Lenguage
 from common.form import FormCreate
 from common.models import About, Products, Testimonial, ClinicMember, Services, Contacts, ApplicationForm, Banners
 from django.contrib import messages
-
 
 # Create your views here.
 
@@ -57,24 +56,30 @@ def form_create(request):
                 id__ = request.POST.get('id')
                 ApplicationForm.objects.create(product_id=id__, **form.cleaned_data)
                 if request.LANGUAGE_CODE == 'uz':
-                    messages.success(request, "Muffaqiyatli Xabaringiz Yuborildi!")
+                    return JsonResponse(
+                        {"message": "So'rovingiz uchun raxmat. Tez orada biz siz bilan bog'lanamiz!", "status": True})
                 elif request.LANGUAGE_CODE == 'ru':
-                    messages.success(request, "Ваше сообщение было успешно отправлено!")
+                    return JsonResponse(
+                        {"message": "Спасибо за ваш запрос. Мы свяжемся с вами в ближайшее время!", "status": True})
                 else:
-                    messages.success(request, "Your message has been successfully sent!")
-                return redirect('index')
+                    return JsonResponse(
+                        {"message": "Thank you for your inquiry. We will contact you shortly!", "status": True})
+
             ApplicationForm.objects.create(**form.cleaned_data)
             if request.LANGUAGE_CODE == 'uz':
-                messages.success(request, "Muffaqiyatli Xabaringiz Yuborildi!")
+                return JsonResponse(
+                    {"message": "So'rovingiz uchun raxmat. Tez orada biz siz bilan bog'lanamiz!", "status": True})
             elif request.LANGUAGE_CODE == 'ru':
-                messages.success(request, "Ваше сообщение было успешно отправлено!")
+                return JsonResponse(
+                    {"message": "Спасибо за ваш запрос. Мы свяжемся с вами в ближайшее время!", "status": True})
             else:
-                messages.success(request, "Your message has been successfully sent!")
-            return redirect('index')
-
-
+                return JsonResponse(
+                    {"message": "Thank you for your inquiry. We will contact you shortly!", "status": True})
         else:
-            messages.error(request, form.errors)
+            res = []
+            for key, value in form.errors.items():
+                res.append({"field": key, "error": value[0]})
+            return JsonResponse({"message": res, "status": False})
     return redirect('index')
 
 
