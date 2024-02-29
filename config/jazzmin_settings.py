@@ -1,21 +1,21 @@
 JAZZMIN_SETTINGS = {
 
     # Login Page
-    "site_header": "Dental.uz",
+    "site_header": "zygoma.uz",
 
-    "login_logo": "",
+    "login_logo": "/img/redketchup/android-chrome-192x192.png",
 
     "login_logo_dark": None,
 
-    "welcome_sign": "Welcome to Dental Admin Panel",
+    "welcome_sign": "Welcome to Zygoma Admin Panel",
 
-    "site_brand": "Dental.uz",
+    "site_brand": "zygoma.uz",
 
-    "site_logo": "admin/img/Posoxlogo2.png",
+    "site_logo": "/img/redketchup/android-chrome-192x192.png",
 
     "site_logo_classes": "img-fluid",
 
-    "site_icon": "https://dental.uz/favicon.ico",
+    "site_icon": "https://zygoma.uz/favicon.ico",
 
     "topmenu_links": [
         {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
@@ -31,7 +31,7 @@ JAZZMIN_SETTINGS = {
         {"model": "auth.accounts"}
     ],
 
-    "site_title": "Dental Admin Panel",
+    "site_title": "Zygoma Admin Panel",
 
     "copyright": "Ismailov Technologies",
 
@@ -135,11 +135,11 @@ JAZZMIN_SETTINGS = {
 }
 
 JAZZMIN_UI_TWEAKS = {
-
+    #
     # "theme": "darkly",
     # "theme": "simplex",
     #  "theme": "sketchy",
-    # "theme": "slate",
-    "theme": "flatly",
+    "theme": "slate",
+    # "theme": "flatly",
     "dark_mode_theme": "darkly",
 }
