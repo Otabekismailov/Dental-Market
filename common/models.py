@@ -91,15 +91,17 @@ class ClinicMember(BaseModel):
         if self.image:
             return mark_safe(f'<a href="{self.image.url}"><img src="{self.image.url}" style="height:40px;"/></a>')
         return 'no_image'
+    class Meta:
+        verbose_name_plural = 'Mutaxassislar'
+        verbose_name = 'Mutaxassislar'
 
-
-class Services(BaseModel):
+class Partners(BaseModel):
     title = models.CharField(max_length=255, null=True, blank=True)
     short_description = models.TextField(null=True, blank=True)
-    image = models.ImageField(upload_to='services/', null=True, blank=True)
+    image = models.ImageField(upload_to='partners/', null=True, blank=True)
     # Buni so'rash Kerak !!
     brand = models.CharField(max_length=255, null=True, blank=True)
-
+    partner_url = models.URLField(null=True,blank=True)
     def __str__(self):
         return self.title
 
@@ -109,15 +111,22 @@ class Services(BaseModel):
         return 'no_image'
 
     class Meta:
-        verbose_name_plural = 'Ishlab chiqaruvchilar'
-        verbose_name = 'Ishlab chiqaruvchilar'
+        verbose_name_plural = 'Hamkorlar'
+        verbose_name = 'Hamkorlar'
+
+    @property
+    def percentage(self):
+        if self.id % 2 == 0:
+            return 1
+        else:
+            return 2
 
 
 class Products(BaseModel):
     title = models.CharField(max_length=255, null=True, blank=True)
     short_description = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to='product/', null=True, blank=True)
-    price = models.DecimalField(max_digits=9999999, decimal_places=0, null=True, blank=True)
+    price = models.IntegerField(null=True, blank=True)
     count = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
@@ -144,8 +153,8 @@ class ProductImages(BaseModel):
         return 'non_file'
 
     def image_tag(self):
-        if self.image:
-            return mark_safe(f'<a href="{self.image.url}"><img src="{self.image.url}" style="height:40px;"/></a>')
+        if self.images:
+            return mark_safe(f'<a href="{self.images.url}"><img src="{self.images.url}" style="height:40px;"/></a>')
         return 'no_image'
 
 
@@ -208,8 +217,8 @@ class Contacts(BaseModel):
         return self.email
 
     class Meta:
-        verbose_name_plural = 'Kontraklar'
-        verbose_name = 'Kontraklar'
+        verbose_name_plural = 'Kontakt'
+        verbose_name = 'Kontakt'
         unique_together = ('from_hour', 'to_hour')
 
 
@@ -231,8 +240,10 @@ class Testimonial(BaseModel):
 
     def __str__(self):
         return self.title
-
-
+   
+    class Meta:
+        verbose_name_plural = 'Commit'
+        verbose_name = 'Commit'
 class TestimonialUser(BaseModel):
     full_name = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
@@ -246,8 +257,10 @@ class TestimonialUser(BaseModel):
         if self.image:
             return mark_safe(f'<a href="{self.image.url}"><img src="{self.image.url}" style="height:40px;"/></a>')
         return 'no_image'
-
-
+    
+    class Meta:
+        verbose_name_plural = 'Commit Users'
+        verbose_name = 'Commit Users'
 class Banners(BaseModel):
     title = models.CharField(max_length=255)
     short_description = models.TextField(null=True, blank=True)
@@ -266,3 +279,6 @@ class Banners(BaseModel):
         if self.image_2:
             return mark_safe(f'<a href="{self.image_2.url}"><img src="{self.image_2.url}" style="height:40px;"/></a>')
         return 'no_image'
+    class Meta:
+        verbose_name_plural = 'Banner'
+        verbose_name = 'Banner'

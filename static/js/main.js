@@ -6,12 +6,8 @@ $(document).ready(function () {
             loop: false,
             nav: false,
             dots: true,
-            autoplay: true,
-            autoplayTimeout: 5000,
-            animateOut: "fadeOut",
-            animateIn: "fadeIn",
             item: 4,
-            margin: 24,
+            margin: 12,
             responsive: {
                 0: {
                     items: 2,
@@ -27,22 +23,21 @@ $(document).ready(function () {
                     items: 5,
                 },
                 1200: {
-                    items: 5.6,
+                    items: 5,
                 },
             },
         });
 
-        $(".product-slider-active").owlCarousel({
-            loop: true,
+
+        $(".expert-list").owlCarousel({
+            loop: false,
             nav: false,
-            autoplay: true,
-            autoplayTimeout: 5000,
-            animateOut: "fadeOut",
-            animateIn: "fadeIn",
+            dots: true,
             item: 4,
-            margin: 30,
+            margin: 24,
             responsive: {
                 0: {
+                    margin: 12,
                     items: 2,
                 },
                 576: {
@@ -50,35 +45,6 @@ $(document).ready(function () {
                 },
                 768: {
                     items: 3,
-                },
-                992: {
-                    items: 4,
-                },
-                1200: {
-                    items: 4,
-                },
-            },
-        });
-
-        $(".expert-list").owlCarousel({
-            loop: false,
-            nav: false,
-            dots: true,
-            autoplay: true,
-            autoplayTimeout: 5000,
-            animateOut: "fadeOut",
-            animateIn: "fadeIn",
-            item: 4,
-            margin: 24,
-            responsive: {
-                0: {
-                    items: 1.5,
-                },
-                576: {
-                    items: 2,
-                },
-                768: {
-                    items: 2.5,
                 },
                 992: {
                     items: 3,
@@ -182,8 +148,7 @@ $(document).ready(function () {
 
         $(trigger).magnificPopup({
             type: 'image',
-            removalDelay: 300,
-            mainClass: 'mfp-fade',
+            fixedContentPos: true,
             gallery: {
                 enabled: true
             },

@@ -1,4 +1,4 @@
-from .models import About, ClinicMember, Services, Products, Testimonial, TestimonialUser, Banners
+from .models import About, ClinicMember, Partners, Products, Testimonial, TestimonialUser, Banners
 from modeltranslation.translator import TranslationOptions, register
 
 
@@ -12,8 +12,8 @@ class ClinicMemberTranslationOptions(TranslationOptions):
     fields = ('description',)
 
 
-@register(Services)
-class ServicesTranslationOptions(TranslationOptions):
+@register(Partners)
+class PartnersTranslationOptions(TranslationOptions):
     fields = ('title', 'short_description',)
 
 
