@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from common.models import Weekdays, Weekends, About, ClinicMember, Services, Products, Contacts, ApplicationForm, \
+from common.models import Weekdays, Weekends, About, ClinicMember, Partners, Products, Contacts, ApplicationForm, \
     WEEKDAYS_UZ, Testimonial, TestimonialUser, Banners, ProductImages
 from django.utils.text import slugify, gettext_lazy as _
 from modeltranslation.admin import TranslationAdmin, TranslationStackedInline
@@ -53,7 +53,19 @@ class WeekendsAdmin(admin.ModelAdmin):
 @admin.register(About)
 class AboutAdmin(TranslationAdmin):
     list_display = ("id", "title", "description", "image_tag", "image", "video_image", "video_image_tag", "url")
+    fieldsets = [
+        ('About', {
+            'fields': [
+                "title", "description", 'image',"url",
+            ],
+        }),
+        (None, {
+            'classes': ['empty-form'],
+            'fields': ("video_image",),
+        }),
 
+    ]
+    group_fieldsets =True
 
 @admin.register(ClinicMember)
 class ClinicMemberAdmin(TranslationAdmin):
@@ -78,17 +90,17 @@ class ClinicMemberAdmin(TranslationAdmin):
     ]
 
 
-@admin.register(Services)
-class ServicesAdmin(TranslationAdmin):
-    list_display = ("id", "title", "short_description", "image_tag",)
-    list_filter = ("id", "title",)
+@admin.register(Partners)
+class PartnersAdmin(TranslationAdmin):
+    list_display = ("id", "title", "short_description", "image_tag","partner_url",)
+    list_filter = ("id", "title","partner_url",)
     search_fields = ("title",)
     group_fieldsets = True
 
     fieldsets = [
-        ('Services', {
+        ('Partners', {
             'fields': [
-                "title", "short_description", 'image',
+                "title", "short_description", 'image',"partner_url",
             ],
         }),
         (None, {
@@ -119,23 +131,29 @@ class ContactAdmin(admin.ModelAdmin):
         f = ''
         t = ''
         data = obj.weekday
-        for k, v in WEEKDAYS_UZ:
-            if k == data.from_weekday_uz:
-                f += v
-            if k == data.to_weekday_uz:
-                t += v
-        return f'{f} - {t}'
+        if data:
+            for k, v in WEEKDAYS_UZ:
+            
+                if k == data.from_weekday_uz:
+                    f += v
+                if k == data.to_weekday_uz:
+                    t += v
+            return f'{f} - {t}'
+        else:
+            return 'no_data'
 
     def weekends_day(self, obj):
         f = ''
         data = obj.weekends
-        for k, v in WEEKDAYS_UZ:
-            if k == data.week_uz:
-                f += v
+        if data:
+            for k, v in WEEKDAYS_UZ:
+                if k == data.week_uz:
+                    f += v
 
-        return f'{f}'
+            return f'{f}'
 
-
+        else:
+            return 'no_data'
 @admin.register(ApplicationForm)
 class ApplicationFormAdmin(admin.ModelAdmin):
     list_display = ("id", "full_name", "phone", "message", 'product')
@@ -166,3 +184,16 @@ class TestimonialAdmin(TranslationAdmin):
 @admin.register(Banners)
 class BannersAdmin(TranslationAdmin):
     list_display = ("id", "title", "short_description", 'image_tag_1', 'image_tag_2',)
+    fieldsets = [
+        ('Banners', {
+            'fields': [
+                "title", "short_description", 'image_1',
+            ],
+        }),
+        (None, {
+            'classes': ['empty-form'],
+            'fields': ("image_2",),
+        }),
+
+    ]
+    group_fieldsets = True

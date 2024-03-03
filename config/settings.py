@@ -36,7 +36,7 @@ DEBUG = env('DEBUG')
 # exception if SECRET_KEY not in os.environ
 SECRET_KEY = env('SECRET_KEY')
 
-ALLOWED_HOSTS = ['0.0.0.0:8000', '0.0.0.0', '127.0.0.1', 'www.zygoma.uz', 'https://95.46.96.15/', '95.46.96.15']
+ALLOWED_HOSTS = ['0.0.0.0:8000', '0.0.0.0', '127.0.0.1', 'www.zygoma.uz', 'https://95.46.96.15/', '95.46.96.15','zygoma.uz']
 
 # Application definition
 
@@ -105,9 +105,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": env("db_name"),
+        "USER": env("db_user"),
+        "PASSWORD": env("db_password"),
+        "HOST": 'localhost',
+        "PORT": 5432,
     }
 }
 
@@ -171,19 +175,19 @@ PARLER_LANGUAGES = {
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 # STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 #
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles'), ]
 #
 # MEDIA_URL = 'media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'static'
+    BASE_DIR / 'staticfiles/'
 ]
 
 MEDIA_URL = '/media/'

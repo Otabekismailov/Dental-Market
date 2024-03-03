@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from common.context_processor import Lenguage
 from common.form import FormCreate
-from common.models import About, Products, Testimonial, ClinicMember, Services, Contacts, ApplicationForm, Banners
+from common.models import About, Products, Testimonial, ClinicMember, Partners, Contacts, ApplicationForm, Banners
 from django.contrib import messages
 
 # Create your views here.
@@ -11,40 +11,16 @@ from django.contrib import messages
 
 def home(request, *args, **kwargs):
     language = request.COOKIES.get('django_language')
-    res = []
+
     about = About.objects.all()
     product = Products.objects.all()
     b = Banners.objects.all()
     t = Testimonial.objects.all()
     m = ClinicMember.objects.all()
-    s = Services.objects.all()
+    s = Partners.objects.all()
     c = Contacts.objects.all()
-    d = {}
 
-    if language == Lenguage.Russion:
-        a = About.objects.values('title_ru', 'description_ru', ).first()
-        d['about_title'] = a["title_ru"]
-        d['about_description'] = a["description_ru"]
-
-        res.append(d)
-
-    elif language == Lenguage.Uzbek:
-        a = About.objects.values('title_uz', 'description_uz', ).first()
-
-        d['about_title'] = a["title_uz"]
-        d['about_description'] = a["description_uz"]
-
-        res.append(d)
-
-    elif language == Lenguage.English:
-        a = About.objects.values('title_en', 'description_en', ).first()
-
-        d['about_title'] = a["title_en"]
-        d['about_description'] = a["description_en"]
-
-        res.append(d)
-
-    return render(request, 'index.html', context={"about_text": res, "about_list": about, "products": product
+    return render(request, 'index.html', context={"about_list": about, "products": product
         , "testimonials": t, "members": m, "services": s, 'contact': c, 'banner': b, })
 
 
