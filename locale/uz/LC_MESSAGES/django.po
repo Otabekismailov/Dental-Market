@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 18:06+0500\n"
+"POT-Creation-Date: 2024-03-05 17:42+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgstr ""
 msgid "Dam Olish Kunlari"
 msgstr ""
 
-#: common/admin.py:67
+#: common/admin.py:79
 msgid "Mutaxasislar"
 msgstr ""
 
@@ -130,87 +130,91 @@ msgstr ""
 msgid "zygoma-admin/"
 msgstr ""
 
-#: templates/index.html:64
+#: templates/index.html:57
 msgid "Zygoma - Dentists Choice"
 msgstr "Zygoma - stomatologlar tanlovi"
 
-#: templates/index.html:173 templates/index.html:267
+#: templates/index.html:176 templates/index.html:270
 msgid "About"
 msgstr "Biz haqimizda"
 
-#: templates/index.html:174 templates/index.html:300
+#: templates/index.html:177 templates/index.html:303
 msgid "Products"
 msgstr "Mahsulotlar"
 
-#: templates/index.html:175 templates/index.html:373
+#: templates/index.html:178 templates/index.html:376
 msgid "Testimonial"
 msgstr "Sharhlar"
 
-#: templates/index.html:176 templates/index.html:424
+#: templates/index.html:179
 msgid "Specialists"
 msgstr "Mutaxassislar"
 
-#: templates/index.html:177
+#: templates/index.html:180
 msgid "Partners"
 msgstr "Hamkorlar"
 
-#: templates/index.html:178
+#: templates/index.html:181
 msgid "Contact Us"
 msgstr "Biz bilan bog'lanish"
 
-#: templates/index.html:240
+#: templates/index.html:243
 msgid "Leave a request"
 msgstr "So'rov qoldiring"
 
-#: templates/index.html:301
+#: templates/index.html:304
 msgid "Our products"
 msgstr "Bizning mahsulotlar"
 
-#: templates/index.html:470
+#: templates/index.html:427
+msgid "Our specialists"
+msgstr "Bizning mutaxassislar"
+
+#: templates/index.html:473
 msgid "Our partners"
 msgstr "Bizning hamkorlar"
 
-#: templates/index.html:488
+#: templates/index.html:491
 msgid "Website"
 msgstr "Sayt"
 
-#: templates/index.html:519
+#: templates/index.html:522
 msgid "Phone"
 msgstr "Telefon"
 
-#: templates/index.html:541
+#: templates/index.html:544
 msgid "Address"
 msgstr "Manzil"
 
-#: templates/index.html:552
+#: templates/index.html:555
 msgid "Open Hours"
 msgstr "Ish vaqti"
 
-#: templates/index.html:581
+#: templates/index.html:584
 msgid "Leave us messages."
 msgstr "Bizga xabarlar qoldiring."
 
-#: templates/index.html:583
+#: templates/index.html:586
 msgid "Fill out this form and we will definitely respond as soon as possible!"
 msgstr "Ushbu formani to'ldiring va biz imkon qadar tezroq javob beramiz!"
 
-#: templates/index.html:590
+#: templates/index.html:593
 msgid "F.I.O"
 msgstr "F.I.Sh."
 
-#: templates/index.html:594
+#: templates/index.html:597
 msgid "Phone number"
 msgstr "Telefon raqami"
 
-#: templates/index.html:600
+#: templates/index.html:603
 msgid "Select a product"
 msgstr "Mahsulotni tanlang"
 
-#: templates/index.html:619
+#: templates/index.html:622
 msgid "Your Message"
 msgstr "Sizning xabaringiz"
 
-#: templates/index.html:628
+#: templates/index.html:631
 msgid "Send"
 msgstr "Yuborish"
 

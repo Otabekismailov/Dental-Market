@@ -52,12 +52,12 @@ class WeekendsAdmin(admin.ModelAdmin):
 
 @admin.register(About)
 class AboutAdmin(TranslationAdmin):
-    list_display = ("id", "title", "description", "image_tag", "image", "video_image", "video_image_tag", "url")
+    list_display = ("id", "title", "description", "image_tag", "image", "video_image", "video_image_tag", "url","telegram_link","instagram_link","facebook_link","youtube_link")
     fieldsets = [
         ('About', {
             'fields': [
                 "title", "description", 'image',"url",
-            ],
+            "telegram_link","instagram_link","facebook_link","youtube_link"],
         }),
         (None, {
             'classes': ['empty-form'],

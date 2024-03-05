@@ -272,13 +272,13 @@
                         {% for item in about_list %}
                             {% if LANG == 'uz' %}
                                 <h2>{{ item.title_uz }}</h2>
-                                <p>{{ item.description_uz }}</p>
+                                <p>{{ item.description_uz|safe }}</p>
                             {% elif LANG == 'ru' %}
                                 <h2>{{ item.title_ru }}</h2>
-                                <p>{{ item.description_ru }}</p>
+                                <p>{{ item.description_ru|safe }}</p>
                             {% elif LANG == 'en' %}
                                 <h2>{{ item.title_en }}</h2>
-                                <p>{{ item.description_en }}</p>
+                                <p>{{ item.description_en|safe }}</p>
 
                             {% endif %}
 
@@ -424,7 +424,7 @@
     <div class="container">
         <div class="expert">
             <div class="title text-max-width">
-                <h2>{% trans 'Specialists' %}</h2>
+                <h2>{% trans 'Our specialists' %}</h2>
             </div>
 
             <div class="expert-list owl-carousel with-pb-md  ">

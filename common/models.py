@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify, gettext_lazy as _
-
+from ckeditor.fields import RichTextField
 WEEKDAYS_EN = (
     (1, _("Monday")),
     (2, _("Tuesday")),
@@ -45,7 +45,7 @@ class BaseModel(models.Model):
 
 class About(BaseModel):
     title = models.CharField(max_length=255, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
+    description = RichTextField(blank=True, null=True)
     image = models.ImageField(upload_to='about/', blank=True, null=True)
     video_image = models.ImageField(upload_to='about/', blank=True, null=True)
     url = models.URLField(blank=True, null=True)
