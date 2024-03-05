@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 18:06+0500\n"
+"POT-Creation-Date: 2024-03-05 17:37+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgstr ""
 msgid "Dam Olish Kunlari"
 msgstr ""
 
-#: common/admin.py:67
+#: common/admin.py:79
 msgid "Mutaxasislar"
 msgstr ""
 
@@ -130,86 +130,90 @@ msgstr ""
 msgid "zygoma-admin/"
 msgstr ""
 
-#: templates/index.html:64
+#: templates/index.html:57
 msgid "Zygoma - Dentists Choice"
 msgstr ""
 
-#: templates/index.html:173 templates/index.html:267
+#: templates/index.html:176 templates/index.html:270
 msgid "About"
 msgstr ""
 
-#: templates/index.html:174 templates/index.html:300
+#: templates/index.html:177 templates/index.html:303
 msgid "Products"
 msgstr ""
 
-#: templates/index.html:175 templates/index.html:373
+#: templates/index.html:178 templates/index.html:376
 msgid "Testimonial"
 msgstr ""
 
-#: templates/index.html:176 templates/index.html:424
+#: templates/index.html:179
 msgid "Specialists"
 msgstr ""
 
-#: templates/index.html:177
+#: templates/index.html:180
 msgid "Partners"
 msgstr ""
 
-#: templates/index.html:178
+#: templates/index.html:181
 msgid "Contact Us"
 msgstr ""
 
-#: templates/index.html:240
+#: templates/index.html:243
 msgid "Leave a request"
 msgstr ""
 
-#: templates/index.html:301
+#: templates/index.html:304
 msgid "Our products"
 msgstr ""
 
-#: templates/index.html:470
+#: templates/index.html:427
+msgid "Our specialists"
+msgstr ""
+
+#: templates/index.html:473
 msgid "Our partners"
 msgstr ""
 
-#: templates/index.html:488
+#: templates/index.html:491
 msgid "Website"
 msgstr ""
 
-#: templates/index.html:519
+#: templates/index.html:522
 msgid "Phone"
 msgstr ""
 
-#: templates/index.html:541
+#: templates/index.html:544
 msgid "Address"
 msgstr ""
 
-#: templates/index.html:552
+#: templates/index.html:555
 msgid "Open Hours"
 msgstr ""
 
-#: templates/index.html:581
+#: templates/index.html:584
 msgid "Leave us messages."
 msgstr ""
 
-#: templates/index.html:583
+#: templates/index.html:586
 msgid "Fill out this form and we will definitely respond as soon as possible!"
 msgstr ""
 
-#: templates/index.html:590
+#: templates/index.html:593
 msgid "F.I.O"
 msgstr ""
 
-#: templates/index.html:594
+#: templates/index.html:597
 msgid "Phone number"
 msgstr ""
 
-#: templates/index.html:600
+#: templates/index.html:603
 msgid "Select a product"
 msgstr ""
 
-#: templates/index.html:619
+#: templates/index.html:622
 msgid "Your Message"
 msgstr ""
 
-#: templates/index.html:628
+#: templates/index.html:631
 msgid "Send"
 msgstr ""
