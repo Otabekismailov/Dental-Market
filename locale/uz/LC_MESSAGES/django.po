@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-05 17:42+0500\n"
+"POT-Creation-Date: 2025-03-22 16:28+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,205 +18,75 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: common/admin.py:19
-msgid "Ish Kunlari"
-msgstr ""
-
-#: common/admin.py:39
-msgid "Dam Olish Kunlari"
-msgstr ""
-
-#: common/admin.py:79
-msgid "Mutaxasislar"
-msgstr ""
-
-#: common/models.py:6
-msgid "Monday"
-msgstr ""
-
-#: common/models.py:7
-msgid "Tuesday"
-msgstr ""
-
-#: common/models.py:8
-msgid "Wednesday"
-msgstr ""
-
-#: common/models.py:9
-msgid "Thursday"
-msgstr ""
-
-#: common/models.py:10
-msgid "Friday"
-msgstr ""
-
-#: common/models.py:11
-msgid "Saturday"
-msgstr ""
-
-#: common/models.py:12
-msgid "Sunday"
-msgstr ""
-
-#: common/models.py:16
-msgid "Понедельник"
-msgstr ""
-
-#: common/models.py:17
-msgid "Вторник"
-msgstr ""
-
-#: common/models.py:18
-msgid "Среда"
-msgstr ""
-
-#: common/models.py:19
-msgid "Четверг"
-msgstr ""
-
-#: common/models.py:20
-msgid "Пятница"
-msgstr ""
-
-#: common/models.py:21
-msgid "Суббота"
-msgstr ""
-
-#: common/models.py:22
-msgid "Воскресенье"
-msgstr ""
-
-#: common/models.py:26
-msgid "Dushanba"
-msgstr ""
-
-#: common/models.py:27
-msgid "Seshanba"
-msgstr ""
-
-#: common/models.py:28
-msgid "Chorshanba"
-msgstr ""
-
-#: common/models.py:29
-msgid "Payshanba"
-msgstr ""
-
-#: common/models.py:30
-msgid "Juma"
-msgstr ""
-
-#: common/models.py:31
-msgid "Shanba"
-msgstr ""
-
-#: common/models.py:32
-msgid "Yaxshanba"
-msgstr ""
-
-#: config/settings.py:149
-msgid "English"
-msgstr ""
-
-#: config/settings.py:150
-msgid "Uzbek"
-msgstr ""
-
-#: config/settings.py:151
-msgid "Русский"
-msgstr ""
-
-#: config/urls.py:25
-msgid "zygoma-admin/"
-msgstr ""
-
-#: templates/index.html:57
 msgid "Zygoma - Dentists Choice"
-msgstr "Zygoma - stomatologlar tanlovi"
+msgstr "Zygoma - Tish shifokorlarining tanlovi"
 
-#: templates/index.html:176 templates/index.html:270
 msgid "About"
 msgstr "Biz haqimizda"
 
-#: templates/index.html:177 templates/index.html:303
 msgid "Products"
 msgstr "Mahsulotlar"
 
-#: templates/index.html:178 templates/index.html:376
 msgid "Testimonial"
 msgstr "Sharhlar"
 
-#: templates/index.html:179
 msgid "Specialists"
 msgstr "Mutaxassislar"
 
-#: templates/index.html:180
 msgid "Partners"
 msgstr "Hamkorlar"
 
-#: templates/index.html:181
 msgid "Contact Us"
-msgstr "Biz bilan bog'lanish"
+msgstr "Biz bilan bog‘laning"
 
-#: templates/index.html:243
 msgid "Leave a request"
-msgstr "So'rov qoldiring"
+msgstr "So‘rov qoldiring"
 
-#: templates/index.html:304
-msgid "Our products"
-msgstr "Bizning mahsulotlar"
+msgid "Count"
+msgstr "Soni"
 
-#: templates/index.html:427
+msgid "Price"
+msgstr "Narxi"
+
 msgid "Our specialists"
 msgstr "Bizning mutaxassislar"
 
-#: templates/index.html:473
 msgid "Our partners"
 msgstr "Bizning hamkorlar"
 
-#: templates/index.html:491
 msgid "Website"
-msgstr "Sayt"
+msgstr "Veb-sayt"
 
-#: templates/index.html:522
 msgid "Phone"
 msgstr "Telefon"
 
-#: templates/index.html:544
 msgid "Address"
 msgstr "Manzil"
 
-#: templates/index.html:555
 msgid "Open Hours"
 msgstr "Ish vaqti"
 
-#: templates/index.html:584
 msgid "Leave us messages."
-msgstr "Bizga xabarlar qoldiring."
+msgstr "Bizga xabar qoldiring."
 
-#: templates/index.html:586
 msgid "Fill out this form and we will definitely respond as soon as possible!"
-msgstr "Ushbu formani to'ldiring va biz imkon qadar tezroq javob beramiz!"
+msgstr "Ushbu shaklni to‘ldiring va biz imkon qadar tezroq javob beramiz!"
 
-#: templates/index.html:593
 msgid "F.I.O"
 msgstr "F.I.Sh."
 
-#: templates/index.html:597
 msgid "Phone number"
 msgstr "Telefon raqami"
 
-#: templates/index.html:603
-msgid "Select a product"
-msgstr "Mahsulotni tanlang"
+msgid "Select a Category"
+msgstr "Kategoriya tanlang"
 
-#: templates/index.html:622
 msgid "Your Message"
-msgstr "Sizning xabaringiz"
+msgstr "Xabaringiz"
 
-#: templates/index.html:631
 msgid "Send"
 msgstr "Yuborish"
+
 
 #~ msgid "Home"
 #~ msgstr "Bosh sahifa"
@@ -226,6 +96,9 @@ msgstr "Yuborish"
 
 #~ msgid "Working time 8 hours"
 #~ msgstr "Ish vaqti 8 soat"
+
+#~ msgid "Our products"
+#~ msgstr "Bizning mahsulotlar"
 
 #~ msgid "Our experts"
 #~ msgstr "Bizning mutaxassislarimiz"
@@ -238,9 +111,6 @@ msgstr "Yuborish"
 
 #~ msgid "The chosen payment method is implemented."
 #~ msgstr "To'lov usuli, siz tanlagan uslubda amalga oshiriladi"
-
-#~ msgid "Prices"
-#~ msgstr "Narxlar"
 
 #~ msgid "Dental"
 #~ msgstr "Stomatologiya"

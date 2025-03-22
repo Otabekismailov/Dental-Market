@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from common.models import Weekdays, Weekends, About, ClinicMember, Partners, Products, Contacts, ApplicationForm, \
-    WEEKDAYS_UZ, Testimonial, TestimonialUser, Banners, ProductImages
+    WEEKDAYS_UZ, Testimonial, TestimonialUser, Banners, ProductImages, Category
 from django.utils.text import slugify, gettext_lazy as _
 from modeltranslation.admin import TranslationAdmin, TranslationStackedInline
 
@@ -52,12 +52,14 @@ class WeekendsAdmin(admin.ModelAdmin):
 
 @admin.register(About)
 class AboutAdmin(TranslationAdmin):
-    list_display = ("id", "title", "description", "image_tag", "image", "video_image", "video_image_tag", "url","telegram_link","instagram_link","facebook_link","youtube_link")
+    list_display = (
+    "id", "title", "description", "image_tag", "image", "video_image", "video_image_tag", "url", "telegram_link",
+    "instagram_link", "facebook_link", "youtube_link")
     fieldsets = [
         ('About', {
             'fields': [
-                "title", "description", 'image',"url",
-            "telegram_link","instagram_link","facebook_link","youtube_link"],
+                "title", "description", 'image', "url",
+                "telegram_link", "instagram_link", "facebook_link", "youtube_link"],
         }),
         (None, {
             'classes': ['empty-form'],
@@ -65,7 +67,8 @@ class AboutAdmin(TranslationAdmin):
         }),
 
     ]
-    group_fieldsets =True
+    group_fieldsets = True
+
 
 @admin.register(ClinicMember)
 class ClinicMemberAdmin(TranslationAdmin):
@@ -92,15 +95,15 @@ class ClinicMemberAdmin(TranslationAdmin):
 
 @admin.register(Partners)
 class PartnersAdmin(TranslationAdmin):
-    list_display = ("id", "title", "short_description", "image_tag","partner_url",)
-    list_filter = ("id", "title","partner_url",)
+    list_display = ("id", "title", "short_description", "image_tag", "partner_url",)
+    list_filter = ("id", "title", "partner_url",)
     search_fields = ("title",)
     group_fieldsets = True
 
     fieldsets = [
         ('Partners', {
             'fields': [
-                "title", "short_description", 'image',"partner_url",
+                "title", "short_description", 'image', "partner_url",
             ],
         }),
         (None, {
@@ -111,6 +114,13 @@ class PartnersAdmin(TranslationAdmin):
     ]
 
 
+@admin.register(Category)
+class CategoryAdmin(TranslationAdmin):
+    list_display = ("id", "name", "image_tag")
+    list_filter = ("name",)
+    search_fields = ("name",)
+
+
 class ProductImageAdmin(admin.StackedInline):
     model = ProductImages
     extra = 1
@@ -118,10 +128,11 @@ class ProductImageAdmin(admin.StackedInline):
 
 @admin.register(Products)
 class ProductsAdmin(TranslationAdmin):
-    list_display = ("id", "title", "short_description", "image_tag", "price", "count")
-    list_filter = ("id", "title")
+    list_display = ("id", "title", "short_description", "image_tag", "price", "count", "category")
+    list_filter = ("id", "title", "category")
     search_fields = ("title",)
     inlines = [ProductImageAdmin]
+
 
 @admin.register(Contacts)
 class ContactAdmin(admin.ModelAdmin):
@@ -133,7 +144,7 @@ class ContactAdmin(admin.ModelAdmin):
         data = obj.weekday
         if data:
             for k, v in WEEKDAYS_UZ:
-            
+
                 if k == data.from_weekday_uz:
                     f += v
                 if k == data.to_weekday_uz:
@@ -154,9 +165,11 @@ class ContactAdmin(admin.ModelAdmin):
 
         else:
             return 'no_data'
+
+
 @admin.register(ApplicationForm)
 class ApplicationFormAdmin(admin.ModelAdmin):
-    list_display = ("id", "full_name", "phone", "message", 'product')
+    list_display = ("id", "full_name", "phone", "message", 'category')
     list_filter = ("id", "full_name", "phone",)
     search_fields = ("full_name", "phone",)
     ordering = ("-id",)

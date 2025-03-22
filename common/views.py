@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from common.context_processor import Lenguage
 from common.form import FormCreate
-from common.models import About, Products, Testimonial, ClinicMember, Partners, Contacts, ApplicationForm, Banners
+from common.models import About, Products, Testimonial, ClinicMember, Partners, Contacts, ApplicationForm, Banners, \
+    Category
 from django.contrib import messages
 
 # Create your views here.
@@ -19,9 +20,10 @@ def home(request, *args, **kwargs):
     m = ClinicMember.objects.all()
     s = Partners.objects.all()
     c = Contacts.objects.all()
+    category_list = Category.objects.all()
 
     return render(request, 'index.html', context={"about_list": about, "products": product
-        , "testimonials": t, "members": m, "services": s, 'contact': c, 'banner': b, })
+        , "testimonials": t, "members": m, "services": s, 'contact': c, 'banner': b,"category": category_list })
 
 
 def form_create(request):
@@ -30,7 +32,7 @@ def form_create(request):
         if form.is_valid():
             if request.POST.get('id') is not None:
                 id__ = request.POST.get('id')
-                ApplicationForm.objects.create(product_id=id__, **form.cleaned_data)
+                ApplicationForm.objects.create(category_id=id__, **form.cleaned_data)
                 if request.LANGUAGE_CODE == 'uz':
                     return JsonResponse(
                         {"message": "So'rovingiz uchun raxmat. Tez orada biz siz bilan bog'lanamiz!", "status": True})
