@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify, gettext_lazy as _
 from ckeditor.fields import RichTextField
+
 WEEKDAYS_EN = (
     (1, _("Monday")),
     (2, _("Tuesday")),
@@ -91,9 +92,11 @@ class ClinicMember(BaseModel):
         if self.image:
             return mark_safe(f'<a href="{self.image.url}"><img src="{self.image.url}" style="height:40px;"/></a>')
         return 'no_image'
+
     class Meta:
         verbose_name_plural = 'Mutaxassislar'
         verbose_name = 'Mutaxassislar'
+
 
 class Partners(BaseModel):
     title = models.CharField(max_length=255, null=True, blank=True)
@@ -101,7 +104,8 @@ class Partners(BaseModel):
     image = models.ImageField(upload_to='partners/', null=True, blank=True)
     # Buni so'rash Kerak !!
     brand = models.CharField(max_length=255, null=True, blank=True)
-    partner_url = models.URLField(null=True,blank=True)
+    partner_url = models.URLField(null=True, blank=True)
+
     def __str__(self):
         return self.title
 
@@ -122,12 +126,26 @@ class Partners(BaseModel):
             return 2
 
 
+class Category(BaseModel):
+    name = models.CharField(max_length=255, unique=True)
+    image = models.ImageField(upload_to='category/', null=True, blank=True)
+
+    def image_tag(self):
+        if self.image:
+            return mark_safe(f'<a href="{self.image.url}"><img src="{self.image.url}" style="height:40px;"/></a>')
+        return 'no_image'
+
+    def __str__(self):
+        return self.name
+
+
 class Products(BaseModel):
-    title = models.CharField(max_length=255, null=True, blank=True)
+    title = models.CharField(max_length=255,)
     short_description = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to='product/', null=True, blank=True)
     price = models.IntegerField(null=True, blank=True)
     count = models.IntegerField(null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -228,6 +246,7 @@ class ApplicationForm(BaseModel):
     phone = models.CharField(max_length=255)
     message = models.TextField(null=True, blank=True)
     product = models.ForeignKey(Products, on_delete=models.SET_NULL, null=True, related_name='form_product', blank=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='form_category', blank=True)
 
     class Meta:
         verbose_name_plural = 'Xabar'
@@ -240,10 +259,12 @@ class Testimonial(BaseModel):
 
     def __str__(self):
         return self.title
-   
+
     class Meta:
         verbose_name_plural = 'Commit'
         verbose_name = 'Commit'
+
+
 class TestimonialUser(BaseModel):
     full_name = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
@@ -257,10 +278,12 @@ class TestimonialUser(BaseModel):
         if self.image:
             return mark_safe(f'<a href="{self.image.url}"><img src="{self.image.url}" style="height:40px;"/></a>')
         return 'no_image'
-    
+
     class Meta:
         verbose_name_plural = 'Commit Users'
         verbose_name = 'Commit Users'
+
+
 class Banners(BaseModel):
     title = models.CharField(max_length=255)
     short_description = models.TextField(null=True, blank=True)
@@ -279,6 +302,7 @@ class Banners(BaseModel):
         if self.image_2:
             return mark_safe(f'<a href="{self.image_2.url}"><img src="{self.image_2.url}" style="height:40px;"/></a>')
         return 'no_image'
+
     class Meta:
         verbose_name_plural = 'Banner'
         verbose_name = 'Banner'

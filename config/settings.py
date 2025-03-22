@@ -30,13 +30,14 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-DEBUG = env('DEBUG')
-
+# DEBUG = env('DEBUG')
+DEBUG = True
 # Raises Django's ImproperlyConfigured
 # exception if SECRET_KEY not in os.environ
 SECRET_KEY = env('SECRET_KEY')
 
-ALLOWED_HOSTS = ['0.0.0.0:8000', '0.0.0.0', '127.0.0.1', 'www.zygoma.uz', 'https://95.46.96.15/', '95.46.96.15','zygoma.uz']
+# ALLOWED_HOSTS = ['0.0.0.0:8000', '0.0.0.0', '127.0.0.1', 'www.zygoma.uz', 'https://95.46.96.15/', '95.46.96.15','zygoma.uz']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -175,24 +176,28 @@ PARLER_LANGUAGES = {
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-# STATIC_URL = '/static/'
+
+
+# STATIC_URL = os.path.join(BASE_DIR, 'static/')
+#
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 #
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles'), ]
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'staticfiles/'
+# ]
 #
-# MEDIA_URL = 'media/'
+# MEDIA_URL = '/media/'
+#
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
+# TODO NEW LOGIC STATIC FILES
 STATIC_URL = '/static/'
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-
-STATICFILES_DIRS = [
-    BASE_DIR / 'staticfiles/'
-]
-
 MEDIA_URL = '/media/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, '/static/')
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 TEMPLATE_DEBUG = True

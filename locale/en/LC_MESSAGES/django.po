@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-05 17:37+0500\n"
+"POT-Creation-Date: 2025-03-22 16:28+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,202 +18,96 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: common/admin.py:19
-msgid "Ish Kunlari"
-msgstr ""
-
-#: common/admin.py:39
-msgid "Dam Olish Kunlari"
-msgstr ""
-
-#: common/admin.py:79
-msgid "Mutaxasislar"
-msgstr ""
-
-#: common/models.py:6
-msgid "Monday"
-msgstr ""
-
-#: common/models.py:7
-msgid "Tuesday"
-msgstr ""
-
-#: common/models.py:8
-msgid "Wednesday"
-msgstr ""
-
-#: common/models.py:9
-msgid "Thursday"
-msgstr ""
-
-#: common/models.py:10
-msgid "Friday"
-msgstr ""
-
-#: common/models.py:11
-msgid "Saturday"
-msgstr ""
-
-#: common/models.py:12
-msgid "Sunday"
-msgstr ""
-
-#: common/models.py:16
-msgid "Понедельник"
-msgstr ""
-
-#: common/models.py:17
-msgid "Вторник"
-msgstr ""
-
-#: common/models.py:18
-msgid "Среда"
-msgstr ""
-
-#: common/models.py:19
-msgid "Четверг"
-msgstr ""
-
-#: common/models.py:20
-msgid "Пятница"
-msgstr ""
-
-#: common/models.py:21
-msgid "Суббота"
-msgstr ""
-
-#: common/models.py:22
-msgid "Воскресенье"
-msgstr ""
-
-#: common/models.py:26
-msgid "Dushanba"
-msgstr ""
-
-#: common/models.py:27
-msgid "Seshanba"
-msgstr ""
-
-#: common/models.py:28
-msgid "Chorshanba"
-msgstr ""
-
-#: common/models.py:29
-msgid "Payshanba"
-msgstr ""
-
-#: common/models.py:30
-msgid "Juma"
-msgstr ""
-
-#: common/models.py:31
-msgid "Shanba"
-msgstr ""
-
-#: common/models.py:32
-msgid "Yaxshanba"
-msgstr ""
-
-#: config/settings.py:149
-msgid "English"
-msgstr ""
-
-#: config/settings.py:150
-msgid "Uzbek"
-msgstr ""
-
-#: config/settings.py:151
-msgid "Русский"
-msgstr ""
-
-#: config/urls.py:25
-msgid "zygoma-admin/"
-msgstr ""
-
 #: templates/index.html:57
 msgid "Zygoma - Dentists Choice"
 msgstr ""
 
-#: templates/index.html:176 templates/index.html:270
+#: templates/index.html:179 templates/index.html:272
 msgid "About"
 msgstr ""
 
-#: templates/index.html:177 templates/index.html:303
+#: templates/index.html:180 templates/index.html:295
 msgid "Products"
 msgstr ""
 
-#: templates/index.html:178 templates/index.html:376
+#: templates/index.html:181 templates/index.html:378
 msgid "Testimonial"
 msgstr ""
 
-#: templates/index.html:179
+#: templates/index.html:182
 msgid "Specialists"
 msgstr ""
 
-#: templates/index.html:180
+#: templates/index.html:183
 msgid "Partners"
 msgstr ""
 
-#: templates/index.html:181
+#: templates/index.html:184
 msgid "Contact Us"
 msgstr ""
 
-#: templates/index.html:243
+#: templates/index.html:246
 msgid "Leave a request"
 msgstr ""
 
-#: templates/index.html:304
-msgid "Our products"
+#: templates/index.html:337
+msgid "Count"
 msgstr ""
 
-#: templates/index.html:427
+#: templates/index.html:339
+msgid "Price"
+msgstr ""
+
+#: templates/index.html:411
 msgid "Our specialists"
 msgstr ""
 
-#: templates/index.html:473
+#: templates/index.html:458
 msgid "Our partners"
 msgstr ""
 
-#: templates/index.html:491
+#: templates/index.html:469
 msgid "Website"
 msgstr ""
 
-#: templates/index.html:522
+#: templates/index.html:501
 msgid "Phone"
 msgstr ""
 
-#: templates/index.html:544
+#: templates/index.html:523
 msgid "Address"
 msgstr ""
 
-#: templates/index.html:555
+#: templates/index.html:534
 msgid "Open Hours"
 msgstr ""
 
-#: templates/index.html:584
+#: templates/index.html:564
 msgid "Leave us messages."
 msgstr ""
 
-#: templates/index.html:586
+#: templates/index.html:566
 msgid "Fill out this form and we will definitely respond as soon as possible!"
 msgstr ""
 
-#: templates/index.html:593
+#: templates/index.html:573
 msgid "F.I.O"
 msgstr ""
 
-#: templates/index.html:597
+#: templates/index.html:577
 msgid "Phone number"
 msgstr ""
 
-#: templates/index.html:603
-msgid "Select a product"
+#: templates/index.html:583 templates/index.html:590
+msgid "Select a Category"
 msgstr ""
 
-#: templates/index.html:622
+#: templates/index.html:596
 msgid "Your Message"
 msgstr ""
 
-#: templates/index.html:631
+#: templates/index.html:605
 msgid "Send"
 msgstr ""
+
+
