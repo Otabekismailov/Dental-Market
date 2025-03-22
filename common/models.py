@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify, gettext_lazy as _
 from ckeditor.fields import RichTextField
-
+# from adminsortable2.models import SortableMixin
 WEEKDAYS_EN = (
     (1, _("Monday")),
     (2, _("Tuesday")),
@@ -129,7 +129,11 @@ class Partners(BaseModel):
 class Category(BaseModel):
     name = models.CharField(max_length=255, unique=True)
     image = models.ImageField(upload_to='category/', null=True, blank=True)
+    my_order = models.IntegerField(
 
+        blank=False,
+        null=False,
+    )
     def image_tag(self):
         if self.image:
             return mark_safe(f'<a href="{self.image.url}"><img src="{self.image.url}" style="height:40px;"/></a>')
@@ -138,6 +142,8 @@ class Category(BaseModel):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['my_order']
 
 class Products(BaseModel):
     title = models.CharField(max_length=255,)

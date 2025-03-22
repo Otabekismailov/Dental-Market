@@ -1,9 +1,11 @@
 from django.contrib import admin
 
+
 from common.models import Weekdays, Weekends, About, ClinicMember, Partners, Products, Contacts, ApplicationForm, \
     WEEKDAYS_UZ, Testimonial, TestimonialUser, Banners, ProductImages, Category
 from django.utils.text import slugify, gettext_lazy as _
 from modeltranslation.admin import TranslationAdmin, TranslationStackedInline
+from adminsortable2.admin import SortableAdminMixin
 
 
 # Register your models here.
@@ -53,8 +55,8 @@ class WeekendsAdmin(admin.ModelAdmin):
 @admin.register(About)
 class AboutAdmin(TranslationAdmin):
     list_display = (
-    "id", "title", "description", "image_tag", "image", "video_image", "video_image_tag", "url", "telegram_link",
-    "instagram_link", "facebook_link", "youtube_link")
+        "id", "title", "description", "image_tag", "image", "video_image", "video_image_tag", "url", "telegram_link",
+        "instagram_link", "facebook_link", "youtube_link")
     fieldsets = [
         ('About', {
             'fields': [
@@ -115,10 +117,12 @@ class PartnersAdmin(TranslationAdmin):
 
 
 @admin.register(Category)
-class CategoryAdmin(TranslationAdmin):
-    list_display = ("id", "name", "image_tag")
+class CategoryAdmin(SortableAdminMixin,TranslationAdmin):
+    list_display = ("id", "name", "image_tag", "my_order")
     list_filter = ("name",)
     search_fields = ("name",)
+    ordering = ("my_order",)
+    sortable_by = ()
 
 
 class ProductImageAdmin(admin.StackedInline):
