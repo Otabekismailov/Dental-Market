@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'corsheaders',
+    'adminsortable2',
 
     # Apps,
     'common.apps.CommonConfig',
